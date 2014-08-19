@@ -1,0 +1,11 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =9
+let g:netrw_dirhist_1='/Users/papl200/.vim/plugin'
+let g:netrw_dirhist_2='/Users/papl200/papl-svn/.svn'
+let g:netrw_dirhist_3='/Users/papl200/kmeans_opencl'
+let g:netrw_dirhist_4='/home/younghwan/gpgpu-sim/v3.x'
+let g:netrw_dirhist_5='/home/younghwan/nvidia/sdk4.2/C/common'
+let g:netrw_dirhist_6='/home/younghwan/.vim'
+let g:netrw_dirhist_7='/usr/include/linux'
+let g:netrw_dirhist_8='/usr/src/linux-headers-3.11.0-15-generic/include/linux/version.h'
+let g:netrw_dirhist_9='/home/younghwan/gpgpu-sim/v3.x/configs/GTX480'
