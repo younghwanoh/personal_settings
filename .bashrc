@@ -1,3 +1,6 @@
+# Python startup files for auto-complete
+export PYTHONSTARTUP=~/.pythonrc
+
 # A shortcut function that simplifies usage of xclip.
 # - Accepts input from either stdin (pipe), or params.
 # ------------------------------------------------
