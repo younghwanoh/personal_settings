@@ -1,0 +1,9 @@
+#!/bin/bash
+
+if [ "$1" = "" ]; then
+    cp $GPGPUSIMROOT/configs/GTX480/* .
+elif [ "$1" = "Tesla" ]; then
+    cp $GPGPUSIMROOT/configs/TeslaC2050/* .
+elif [ "$1" = "reset" ]; then
+    rm _cuobjdump* *.config *.txt *.icnt gpuwattch*
+fi

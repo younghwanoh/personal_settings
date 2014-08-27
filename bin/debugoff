@@ -1,0 +1,6 @@
+#!/bin/bash
+
+export GPGPUSIM_DEBUG=
+echo "Interactive debug is turned off"
+export PTX_SIM_DEBUG=
+echo "PTX_SIM_DEBUG is unset"

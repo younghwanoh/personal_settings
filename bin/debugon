@@ -1,0 +1,12 @@
+#!/bin/bash
+
+# export GPGPUSIM_DEBUG=1
+# echo "Interactive debug is turned on"
+if [ "$1" == "" ]; then
+    export PTX_SIM_DEBUG=6
+else
+    export PTX_SIM_DEBUG=$1
+fi
+
+echo "PTX_SIM_DEBUG is set to"
+echo $PTX_SIM_DEBUG
