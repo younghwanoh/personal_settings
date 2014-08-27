@@ -18,3 +18,7 @@ else
 /home/younghwan/nvidia/cuda3/cuda/lib64:\
 /home/younghwan/nvidia/cuda3/cuda/lib
 fi
+
+alias ondebug="source ~/bin/debugon"
+alias offdebug="source ~/bin/debugoff"
+alias ongpusim="source ~/gpgpu-sim/v3.x/setup_environment"
