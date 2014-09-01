@@ -1,9 +1,12 @@
 #!/bin/bash
 
 if [ "$1" = "" ]; then
-    cp $GPGPUSIMROOT/configs/GTX480/* .
+    cp $GPGPUSIMROOT/configs/GTX480/config_fermi_islip.icnt .
+    cp $GPGPUSIMROOT/configs/GTX480/gpuwattch_gtx480.xml .
+    ln -s $GPGPUSIMROOT/configs/GTX480/gpgpusim.config .
 elif [ "$1" = "Tesla" ]; then
-    cp $GPGPUSIMROOT/configs/TeslaC2050/* .
+    cp $GPGPUSIMROOT/configs/TeslaC2050/config_fermi_islip.icnt .
+    ln -s $GPGPUSIMROOT/configs/TeslaC2050/gpgpusim.config .
 elif [ "$1" = "reset" ]; then
-    rm _cuobjdump* *.config *.txt *.icnt gpuwattch*
+    rm _cuobjdump* *.config *.txt *.icnt gpuwattch* _ptxplus*
 fi
