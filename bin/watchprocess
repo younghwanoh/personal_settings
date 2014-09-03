@@ -11,6 +11,8 @@ parser.add_argument("exename", help='Specify target process id which you want to
 parser.add_argument("-n","--name", help='Specify names which identifies the target process')
 parser.add_argument("-m","--message", help='Specify custom messages otherwise same with title')
 parser.add_argument("-a","--after", help='Specfy instructions after the current process is over')
+parser.add_argument("-i","--id", help='Denote Your ID for the account of SMTP server')
+parser.add_argument("-p","--pass", help='Denote your password for the account of SMTP server')
 args = parser.parse_args()
 
 def sendemail(from_addr, to_addr_list, cc_addr_list,
@@ -49,5 +51,5 @@ sendemail(from_addr    = 'garion9013@papl.com',
           cc_addr_list = [''],
           subject      = '%s is finished' % args.name,
           message      = args.message if bool(args.message) else '%s is finished' % args.name,
-          login        = 'garion9013',
-          password     = 'akfldh12')
+          login        = args.id,
+          password     = args.pass)
