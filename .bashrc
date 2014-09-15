@@ -1,6 +1,9 @@
 # Python startup files for auto-complete
 export PYTHONSTARTUP=~/.pythonrc
 
+# target for ~/bin/pc
+export COPY_TARGET=~/workspace/
+
 # A shortcut function that simplifies usage of xclip.
 # - Accepts input from either stdin (pipe), or params.
 # ------------------------------------------------
