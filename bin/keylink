@@ -1,0 +1,15 @@
+#!/bin/bash
+
+if [ "$1" == "on" ]; then
+    if [ -z "$2" ]; then
+        target=115.145.211.205
+    else
+        target=$2
+    fi
+    echo "Connection target: "$target
+
+    /usr/bin/synergyc $target
+elif [ "$1" == "off" ]; then
+    pgrep synergyc
+    kill `pgrep synergyc`
+fi
