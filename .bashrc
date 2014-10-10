@@ -8,10 +8,16 @@ export COPY_TARGET=~/workspace/
 # - Accepts input from either stdin (pipe), or params.
 # ------------------------------------------------
 cb() {
-  local _scs_col="\e[0;32m"; local _wrn_col='\e[1;31m'; local _trn_col='\e[0;33m'
-  # Check that xclip is installed.
-  if ! type xclip > /dev/null 2>&1; then
-    echo -e "$_wrn_col""You must have the 'xclip' program installed.\e[0m"
+  local _scs_col='\033[00;32m'; local _wrn_col='\033[01;31m'; local _trn_col='\033[00;33m';
+  # Identify OS
+  if [[ $OSTYPE == "linux-gnu" ]]; then
+    local _clip="xclip";
+  elif [[ $OSTYPE == "darwin"* ]]; then
+    local _clip="pbcopy";
+  fi
+  # Check that xclip or pbcopy is installed.
+  if ! type $_cp > /dev/null 2>&1; then
+    echo -e "$_wrn_col""You must have the '""$_clip""' program installed.\e[0m"
   # Check user is not root (root doesn't have access to user xorg server)
   elif [[ "$USER" == "root" ]]; then
     echo -e "$_wrn_col""Must be regular user (not root) to copy a file to the clipboard.\e[0m"
@@ -29,12 +35,12 @@ cb() {
       echo "       echo <string> | cb"
     else
       # Copy input to clipboard
-      echo -n "$input" | xclip -selection c
-      echo -n "$input" | xclip
+      echo -n "$input" | $_clip -selection c
+      echo -n "$input" | $_clip
       # Truncate text for status
-      if [ ${#input} -gt 80 ]; then input="$(echo $input | cut -c1-80)$_trn_col...\e[0m"; fi
+      if [ ${#input} -gt 80 ]; then input="$(echo $input | cut -c1-80)$_trn_col...\033[0m"; fi
       # Print status.
-      echo -e "$_scs_col""Copied to clipboard:\e[0m $input"
+      echo -e "$_scs_col""Copied to clipboard:\033[0m $input"
     fi
   fi
 }
