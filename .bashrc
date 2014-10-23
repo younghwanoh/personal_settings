@@ -1,6 +1,9 @@
 # Python startup files for auto-complete
 export PYTHONSTARTUP=~/.pythonrc
 
+# include ep.py libraries
+# export PYTHONPATH=$PYTHONPATH:~/ep-py
+
 # target for ~/bin/pc
 export COPY_TARGET=~/workspace/
 
