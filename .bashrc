@@ -10,24 +10,14 @@ export COPY_TARGET=~/workspace/
 # export GPGPUSIMROOT=~/gpgpu-sim/v3.x
 # export CUDA_VER=4.2
 # if [ "$CUDA_VER" = "3" ] || [ "$CUDA_VER" = "4" ] || [ "$CUDA_VER" = "4.2" ]; then
-#     # export CPLUS_INCLUDE_PATH=/home/younghwan/nvidia/cuda$CUDA_VER/cuda/include
-#     export PATH=$PATH:/home/younghwan/nvidia/cuda$CUDA_VER/cuda/bin
-#     export PATH=$PATH:/home/younghwan/nvidia/cuda$CUDA_VER/cuda
-#     export CUDA_INSTALL_PATH=/home/younghwan/nvidia/cuda$CUDA_VER/cuda
-#     export NVIDIA_COMPUTE_SDK_LOCATION=/home/younghwan/nvidia/sdk$CUDA_VER
+#     # export CPLUS_INCLUDE_PATH=~/nvidia/cuda$CUDA_VER/cuda/include
+#     export PATH=$PATH:~/nvidia/cuda$CUDA_VER/cuda/bin
+#     export PATH=$PATH:~/nvidia/cuda$CUDA_VER/cuda
+#     export CUDA_INSTALL_PATH=~/nvidia/cuda$CUDA_VER/cuda
+#     export NVIDIA_COMPUTE_SDK_LOCATION=~/nvidia/sdk$CUDA_VER
 #     export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:\
-# /home/younghwan/nvidia/cuda$CUDA_VER/cuda/lib64:\
-# /home/younghwan/nvidia/cuda$CUDA_VER/cuda/lib
-# else
-#     # echo "No CUDA version is denoted. Default: 3.1 is selected."
-#     # export CPLUS_INCLUDE_PATH=/home/younghwan/nvidia/cuda3/cuda/include
-#     export PATH=$PATH:/home/younghwan/nvidia/cuda3/cuda/bin
-#     export PATH=$PATH:/home/younghwan/nvidia/cuda3/cuda
-#     export CUDA_INSTALL_PATH=/home/younghwan/nvidia/cuda3/cuda
-#     export NVIDIA_COMPUTE_SDK_LOCATION=/home/younghwan/nvidia/sdk3
-#     export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:\
-# /home/younghwan/nvidia/cuda3/cuda/lib64:\
-# /home/younghwan/nvidia/cuda3/cuda/lib
+# ~/nvidia/cuda$CUDA_VER/cuda/lib64:\
+# ~/nvidia/cuda$CUDA_VER/cuda/lib
 # fi
 
 # A shortcut function that simplifies usage of xclip.
@@ -86,9 +76,9 @@ export PATH=$PATH:~/bin
 # Dependent packages: synergy, gpgpu-sim
 # Custom aliases
 alias open="gnome-open"
-# alias ondebug="source ~/bin/debugon"
-# alias offdebug="source ~/bin/debugoff"
-# alias ongpusim="source ~/gpgpu-sim/v3.x/setup_environment"
+alias ondebug="source ~/bin/debugon"
+alias offdebug="source ~/bin/debugoff"
+alias ongpusim="source ~/gpgpu-sim/v3.x/setup_environment"
 alias findreg="find . -regextype sed -regex"
 alias synchost="synergyc -f 115.145.211.205"
 
