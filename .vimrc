@@ -3,6 +3,8 @@ au BufRead *
 			\ if line("'\"") > 0 && line("'\"") <= line("$") |
 			\    exe "norm g'\"" |
 			\ endif
+" vmap paste and delete
+vmap r "_dP
 " vmap copy
 vmap "y "+y
 vmap <C-c> "+y
