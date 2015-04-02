@@ -2,23 +2,23 @@
 export PYTHONSTARTUP=~/.pythonrc
 
 # include ep.py libraries
-# export PYTHONPATH=$PYTHONPATH:~/ep-py
+export PYTHONPATH=$PYTHONPATH:~/ep-py
 
 # target for ~/bin/pc
 export COPY_TARGET=~/workspace/
 
-# export GPGPUSIMROOT=~/gpgpu-sim/v3.x
-# export CUDA_VER=4.2
-# if [ "$CUDA_VER" = "3" ] || [ "$CUDA_VER" = "4" ] || [ "$CUDA_VER" = "4.2" ]; then
-#     # export CPLUS_INCLUDE_PATH=~/nvidia/cuda$CUDA_VER/cuda/include
-#     export PATH=$PATH:~/nvidia/cuda$CUDA_VER/cuda/bin
-#     export PATH=$PATH:~/nvidia/cuda$CUDA_VER/cuda
-#     export CUDA_INSTALL_PATH=~/nvidia/cuda$CUDA_VER/cuda
-#     export NVIDIA_COMPUTE_SDK_LOCATION=~/nvidia/sdk$CUDA_VER
-#     export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:\
-# ~/nvidia/cuda$CUDA_VER/cuda/lib64:\
-# ~/nvidia/cuda$CUDA_VER/cuda/lib
-# fi
+export GPGPUSIMROOT=~/gpgpu-sim/v3.x
+export CUDA_VER=4.2
+if [ "$CUDA_VER" = "3" ] || [ "$CUDA_VER" = "4" ] || [ "$CUDA_VER" = "4.2" ]; then
+    # export CPLUS_INCLUDE_PATH=~/nvidia/cuda$CUDA_VER/cuda/include
+    export PATH=$PATH:~/nvidia/cuda$CUDA_VER/cuda/bin
+    export PATH=$PATH:~/nvidia/cuda$CUDA_VER/cuda
+    export CUDA_INSTALL_PATH=~/nvidia/cuda$CUDA_VER/cuda
+    export NVIDIA_COMPUTE_SDK_LOCATION=~/nvidia/sdk$CUDA_VER
+    export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:\
+~/nvidia/cuda$CUDA_VER/cuda/lib64:\
+~/nvidia/cuda$CUDA_VER/cuda/lib
+fi
 
 # A shortcut function that simplifies usage of xclip.
 # - Accepts input from either stdin (pipe), or params.
