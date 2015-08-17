@@ -12,7 +12,7 @@ ext2="${second##*.}"  # split filename from
 if [ "$ext1" == "bz2" ] && [ "$ext2" == "tar" ]; then
     echo "Extract tar.bz2"
     tar -jxvf $1 
-elif [ "$extension" == "tar.gz" ]; then
+if [ "$ext1" == "gz" ] && [ "$ext2" == "tar" ]; then
     echo "Extract tar.gz"
     tar -zxvf $1
 else
