@@ -5,9 +5,9 @@ ext1="${first##*.}"
 second="${first%.*}"  # split filename from 
 ext2="${second##*.}"  # split filename from 
 
-echo "$filename"
-echo "$ext1"
-echo "$ext2"
+# echo "$filename"
+# echo "$ext1"
+# echo "$ext2"
 
 if [ "$ext1" == "bz2" ] && [ "$ext2" == "tar" ]; then
     echo "Extract tar.bz2"
