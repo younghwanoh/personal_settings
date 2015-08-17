@@ -1,0 +1,20 @@
+#!/bin/bash
+
+first="$1"
+ext1="${first##*.}"
+second="${first%.*}"  # split filename from 
+ext2="${second##*.}"  # split filename from 
+
+echo "$filename"
+echo "$ext1"
+echo "$ext2"
+
+if [ "$ext1" == "bz2" ] && [ "$ext2" == "tar" ]; then
+    echo "Extract tar.bz2"
+    tar -jxvf $1 
+elif [ "$extension" == "tar.gz" ]; then
+    echo "Extract tar.gz"
+    tar -zxvf $1
+else
+    echo "No matched target"
+fi
