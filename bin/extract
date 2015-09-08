@@ -20,21 +20,21 @@ if [[ $# -gt 2 ]]; then
 		echo "Create new folder"
 		mkdir $name
 	    fi
-	    tar -jxvf $1 
+	    tar -jxvf $1 -C `pwd`/$name
 	elif [ "$ext1" == "gz" ] && [ "$ext2" == "tar" ]; then
 	    echo "Extract tar.gz"
 	    if [ ! -e $name ]; then
 		echo "Create new folder"
 		mkdir $name
 	    fi
-	    tar -zxvf $1
+	    tar -zxvf $1 -C `pwd`/$name
 	elif [ "$ext1" == "tar" ] && [ "$ext2" != "gz" ]; then
 	    echo "Extract tar"
 	    if [ ! -e $ext2 ]; then
 		echo "Create new folder"
 		mkdir $ext2
 	    fi
-	    tar -xopf $1
+	    tar -xopf $1 -C `pwd`/$ext2
 	else
 	    echo "No matched target"
 	fi
