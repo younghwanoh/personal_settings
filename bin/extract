@@ -12,7 +12,7 @@ if [[ $# -gt 2 ]]; then
 	second="${first%.*}" 
 	ext2="${second##*.}"  # second extension
 	name="${second%.*}"   # filename or empty
-	echo $name, $ext2
+	# echo $name, $ext2
 
 	if [ "$ext1" == "bz2" ] && [ "$ext2" == "tar" ]; then
 	    echo "Extract tar.bz2"
