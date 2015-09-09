@@ -8,6 +8,7 @@
 # arguments > 2, extract all arguments
 if [[ $# -gt 2 ]]; then
     for first in $@; do
+	echo $first
 	ext1="${first##*.}"   # first extension
 	second="${first%.*}" 
 	ext2="${second##*.}"  # second extension
@@ -20,21 +21,21 @@ if [[ $# -gt 2 ]]; then
 		echo "Create new folder"
 		mkdir $name
 	    fi
-	    tar -jxvf $1 -C `pwd`/$name
+	    tar -jxvf $first -C `pwd`/$name
 	elif [ "$ext1" == "gz" ] && [ "$ext2" == "tar" ]; then
 	    echo "Extract tar.gz"
 	    if [ ! -e $name ]; then
 		echo "Create new folder"
 		mkdir $name
 	    fi
-	    tar -zxvf $1 -C `pwd`/$name
+	    tar -zxvf $first -C `pwd`/$name
 	elif [ "$ext1" == "tar" ] && [ "$ext2" != "gz" ]; then
 	    echo "Extract tar"
 	    if [ ! -e $ext2 ]; then
 		echo "Create new folder"
 		mkdir $ext2
 	    fi
-	    tar -xopf $1 -C `pwd`/$ext2
+	    tar -xopf $first -C `pwd`/$ext2
 	else
 	    echo "No matched target"
 	fi
