@@ -1,27 +1,37 @@
-# Python startup files for auto-complete
+# default settings
+# ------------------------------------------------
+export PATH=$PATH:/home/yhlinux/bin
 export PYTHONSTARTUP=~/.pythonrc
 
-# include ep.py libraries
+# Custom aliases
+alias open="gnome-open"
+alias findreg="find . -regextype sed -regex"
+
+# FOR INSTALLED PACKAGES
+# ------------------------------------------------
+
+# Webkit
+# export LD_LIBRARY_PATH=$LD_LIBRARY_PATH::~/papl-svn/projects/parallelJS/external/webkit-webcl/WebKitBuild/Dependencies/Root/lib64
+
+# LLVM 3.7
+export PATH=$PATH:/home/yhlinux/llvm/build/bin
+
+# cmake 3.3 manual install
+export PATH=/opt/cmake/bin:$PATH
+export JAVA_HOME=/usr/local/java/jdk1.8.0_60
+
+# CUDA 7.0
+export PATH=$PATH:/usr/local/cuda/bin
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda/lib64
+
+# ep.py
 export PYTHONPATH=$PYTHONPATH:~/ep-py
 
-# target for ~/bin/pc
-export COPY_TARGET=~/workspace/
+# added by Anaconda 2.3.0 installer
+export PATH="/home/yhlinux/anaconda/bin:$PATH"
+export CMAKE_PREFIX_PATH=/home/yhlinux/anaconda/
 
-export GPGPUSIMROOT=~/gpgpu-sim/v3.x
-export CUDA_VER=4.2
-if [ "$CUDA_VER" = "3" ] || [ "$CUDA_VER" = "4" ] || [ "$CUDA_VER" = "4.2" ]; then
-    # export CPLUS_INCLUDE_PATH=~/nvidia/cuda$CUDA_VER/cuda/include
-    export PATH=$PATH:~/nvidia/cuda$CUDA_VER/cuda/bin
-    export PATH=$PATH:~/nvidia/cuda$CUDA_VER/cuda
-    export CUDA_INSTALL_PATH=~/nvidia/cuda$CUDA_VER/cuda
-    export NVIDIA_COMPUTE_SDK_LOCATION=~/nvidia/sdk$CUDA_VER
-    export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:\
-~/nvidia/cuda$CUDA_VER/cuda/lib64:\
-~/nvidia/cuda$CUDA_VER/cuda/lib
-fi
-
-# A shortcut function that simplifies usage of xclip.
-# - Accepts input from either stdin (pipe), or params.
+# Custom function
 # ------------------------------------------------
 cb() {
   local _scs_col='\033[00;32m'; local _wrn_col='\033[01;31m'; local _trn_col='\033[00;33m';
@@ -72,16 +82,9 @@ alias cbwd="pwd | cb"
 # Copy most recent command in bash history
 alias cbhs="cat $HISTFILE | tail -n 1 | cb"  
 
-export PATH=$PATH:~/bin
-# Dependent packages: synergy, gpgpu-sim
-# Custom aliases
-alias open="gnome-open"
-alias ondebug="source ~/bin/debugon"
-alias offdebug="source ~/bin/debugoff"
-alias ongpusim="source ~/gpgpu-sim/v3.x/setup_environment"
-alias findreg="find . -regextype sed -regex"
-alias synchost="synergyc -f 115.145.211.205"
 
+# DEFAULT FROM UBUNTU 12.04
+# ------------------------------------------------
 
 # ~/.bashrc: executed by bash(1) for non-login shells.
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
@@ -165,6 +168,12 @@ if [ -x /usr/bin/dircolors ]; then
     alias fgrep='fgrep --color=auto'
     alias egrep='egrep --color=auto'
 fi
+
+# File indexed grep
+filegrep(){
+  grep -Hn $1 `cat ~/.vim/grep_lists`
+}
+alias igrep=filegrep
 
 # some more ls aliases
 alias ll='ls -alF'
