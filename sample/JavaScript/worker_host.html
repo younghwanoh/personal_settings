@@ -1,0 +1,12 @@
+<html>
+<script>
+var w = new Worker("worker.js")
+
+for (var i=0; i<3;i++)
+    w.postMessage();
+
+w.onmessage = function(){
+    window.close();
+}
+</script>
+</html>
