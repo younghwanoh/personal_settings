@@ -48,6 +48,9 @@ autocmd BufEnter * :syntax sync fromstart
 " Syntax highlighting: OpenCL
 au BufRead,BufNewFile *.cl set filetype=opencl
 call tcomment#DefineType('opencl', '// %s')
+" Syntax highlighting: Custom data
+au BufRead,BufNewFile *.dat set filetype=dat
+call tcomment#DefineType('dat', '# %s')
 " llvm syntax highlighting (asm)
   augroup filetype
     au! BufRead,BufNewFile *.s     set filetype=llvm
