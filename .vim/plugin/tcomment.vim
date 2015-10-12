@@ -34,7 +34,7 @@ endif
 
 if !exists("g:tcommentMapLeaderOp1")
     " See |tcomment-operator|.
-    let g:tcommentMapLeaderOp1 = '/' "{{{2
+    let g:tcommentMapLeaderOp1 = '\' "{{{2
 endif
 
 if !exists("g:tcommentMapLeaderOp2")

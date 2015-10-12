@@ -1,3 +1,56 @@
+" " Vundle start =============================================================================
+" set nocompatible              " be iMproved, required
+" filetype off                  " required
+"
+" " set the runtime path to include Vundle and initialize
+" set rtp+=~/.vim/bundle/Vundle.vim
+" call vundle#begin()
+"
+" " let Vundle manage Vundle, required
+" Plugin 'VundleVim/Vundle.vim'
+"
+" " All of your Plugins must be added before the following line
+" call vundle#end()            " required
+" filetype plugin indent on    " required
+"
+" " Brief help
+" " :PluginList       - lists configured plugins
+" " :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
+" " :PluginSearch foo - searches for foo; append `!` to refresh local cache
+" " :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
+"
+" " Vundle end ===============================================================================
+
+" Toolset start ============================================================================
+" Code completion
+cnoreabbrev t NeoCompleteToggle 
+let g:neocomplete#enable_at_startup = 0
+let g:neocomplete#enable_auto_select = 1
+let g:neocomplete#auto_completion_start_length = 3
+inoremap <expr><C-g>  neocomplete#undo_completion()
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+
+" Ctags for caffe
+set tags+=/Users/younghwan/workspace/caffe/include/tags
+set tags+=/Users/younghwan/workspace/caffe/src/caffe/tags
+set tags+=/Users/younghwan/workspace/caffe/tools/tags
+
+" Ctags for gpgpusim
+" set tags+=/home/younghwan/gpgpu-sim/v3.x/libcuda/tags
+" set complete
+
+" Cscope for gpgpusim
+" set csprg=/usr/bin/cscope
+" set cst " use cscope
+" if filereadable("/home/younghwan/gpgpu-sim/v3.x/src/cscope.out")
+"   cs add /home/younghwan/gpgpu-sim/v3.x/src/cscope.out
+"   endif
+
+" Toolset end =============================================================================
+
 " Point the last line before termination
 au BufRead *
 			\ if line("'\"") > 0 && line("'\"") <= line("$") |
@@ -7,7 +60,6 @@ au BufRead *
 vmap r "_dP
 " vmap copy
 vmap "y "+y
-vmap <C-c> "+y
 " use 256 bit color
 let &t_Co=256
 " disable background color erase
@@ -31,8 +83,8 @@ set encoding=utf-8 nobomb
 " Change mapleader
 let mapleader=","
 " Don’t add empty newlines at the end of files
-"set binary
-"set noeol
+set binary
+set noeol
 " file tpye plugins are enabled
 filetype plugin on
 " Respect modeline in files
@@ -41,32 +93,36 @@ set modelines=4
 " Enable line numbers
 set number
 
-" Enable syntax highlighting
+" Enable syntax highlighting ============================================================
 syntax on
-" syntax highlighting from start
 autocmd BufEnter * :syntax sync fromstart
-" Syntax highlighting: OpenCL
-au BufRead,BufNewFile *.cl set filetype=opencl
-call tcomment#DefineType('opencl', '// %s')
-" Syntax highlighting: Custom data
-au BufRead,BufNewFile *.dat set filetype=dat
-call tcomment#DefineType('dat', '# %s')
-" llvm syntax highlighting (asm)
+" Syntax highlighting with tcomment
   augroup filetype
-    au! BufRead,BufNewFile *.s     set filetype=llvm
-  augroup END
-" llvm makefile syntax highlighting
-  augroup filetype
+    au! BufRead,BufNewFile *.s            set filetype=llvm
     au! BufRead,BufNewFile *Makefile*     set filetype=make
+    au! BufRead,BufNewFile *.dat          set filetype=dat
+    au! BufRead,BufNewFile *.cl           set filetype=opencl
   augroup END
+call tcomment#DefineType('opencl', '// %s')
+call tcomment#DefineType('dat', '# %s')
+" Automatic commands
+if has("autocmd")
+  " Enable file type detection
+  filetype on
+  " Treat .json files as .js
+  autocmd BufNewFile,BufRead *.json setfiletype json syntax=javascript
+endif
+" Syntax highlighting end ==============================================================
+
 " Highlight current line
 set cursorline
 
 " Make tabs as wide as two spaces
-" set tabstop=2
+set tabstop=2
 set softtabstop=2
 set expandtab
 set sw=2
+
 " Show “invisible” characters
 " set lcs=tab:▸\ ,trail:·,eol:¬,nbsp:_
 " set lcs=tab:▸\
@@ -93,25 +149,3 @@ set title
 set showcmd
 " Start scrolling three lines before the horizontal window border
 set scrolloff=3
-
-" Save a file as root (,W)
-noremap <leader>W :w !sudo tee % > /dev/null<CR>
-
-" Automatic commands
-if has("autocmd")
-  " Enable file type detection
-  filetype on
-  " Treat .json files as .js
-  autocmd BufNewFile,BufRead *.json setfiletype json syntax=javascript
-endif
-
-" Ctags for gpgpusim
-" set tags+=/home/younghwan/gpgpu-sim/v3.x/libcuda/tags
-" set complete
-
-" Cscope for gpgpusim
-" set csprg=/usr/bin/cscope
-" set cst " use cscope
-" if filereadable("/home/younghwan/gpgpu-sim/v3.x/src/cscope.out")
-"   cs add /home/younghwan/gpgpu-sim/v3.x/src/cscope.out
-"   endif
