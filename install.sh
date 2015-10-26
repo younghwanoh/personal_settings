@@ -13,4 +13,5 @@ if [ "$(uname -s)" == "Darwin" ]; then
   
 elif [ "$(uname -s)" == "Linux" ]; then
   echo "Found Linux: Copy custom settings"
+  cp -rf .vim .vimrc ~/
 fi
