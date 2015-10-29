@@ -6,13 +6,14 @@ from time import sleep
 import sys
 import smtplib
 import argparse
+
 parser = argparse.ArgumentParser()
 parser.add_argument("exename", help='Specify target process id which you want to watch')
 parser.add_argument("-n","--name", help='Specify names which identifies the target process')
 parser.add_argument("-m","--message", help='Specify custom messages otherwise same with title')
 parser.add_argument("-a","--after", help='Specfy instructions after the current process is over')
 parser.add_argument("-i","--id", help='Denote Your ID for the account of SMTP server')
-parser.add_argument("-p","--pass", help='Denote your password for the account of SMTP server')
+parser.add_argument("-p","--passwd", help='Denote your password for the account of SMTP server')
 args = parser.parse_args()
 
 def sendemail(from_addr, to_addr_list, cc_addr_list,
@@ -32,7 +33,6 @@ def sendemail(from_addr, to_addr_list, cc_addr_list,
     server.quit()
 
 while(True):
-    print("...ing")
     sleep(2)
     cur = commands.getoutput('ps -C %s' % args.exename)
     if len(cur.split('\n')) == 1:
@@ -44,12 +44,17 @@ print(">> Finished ==========================================\n")
 if bool(args.after) is True:
     print("Run job pending to the current watching process")
     cur = commands.getoutput(args.after)
- 
-# Example Usage of above script
-sendemail(from_addr    = 'garion9013@papl.com',
-          to_addr_list = ['garion9013@gmail.com'],
-          cc_addr_list = [''],
-          subject      = '%s is finished' % args.name,
-          message      = args.message if bool(args.message) else '%s is finished' % args.name,
-          login        = args.id,
-          password     = args.pass)
+
+
+if __name__ == "__main__":
+    if len(sys.argv) < 2:
+        print parser.print_help()
+    else:
+        # Example Usage of above script
+        sendemail(from_addr    = 'garion9013@papl.com',
+                  to_addr_list = ['garion9013@gmail.com'],
+                  cc_addr_list = [''],
+                  subject      = '%s is finished' % args.name,
+                  message      = args.message if bool(args.message) else '%s is finished' % args.name,
+                  login        = args.id,
+                  password     = args.passwd)
