@@ -60,6 +60,9 @@ au BufRead *
 vmap r "_dP
 " vmap copy
 vmap "y "+y
+" vmap remote copy: vis plugin is needed to yank selected only
+" Download plugin @ http://vim.sourceforge.net/scripts/script.php?script_id=1195
+" vmap <C-c> :B w !cb<CR><CR>
 " use 256 bit color
 let &t_Co=256
 " disable background color erase
@@ -98,6 +101,7 @@ syntax on
 autocmd BufEnter * :syntax sync fromstart
 " Syntax highlighting with tcomment
   augroup filetype
+    au! BufRead,BufNewFile *.perl            set filetype=perl
     au! BufRead,BufNewFile *.s            set filetype=llvm
     au! BufRead,BufNewFile *Makefile*     set filetype=make
     au! BufRead,BufNewFile *.dat          set filetype=dat
