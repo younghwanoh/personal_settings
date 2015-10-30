@@ -44,9 +44,11 @@ show(){
     tail -n +$X $path | head -n $((Y-X+1))
 }
 
-# Remote access 
-export MY_SSH_REMOTE_HOST="yhmac"
-export MY_SSH_REMOTE_STARTDIR="/Users/younghwan/"
+# Remote access
+export MY_SSH_DEFAULT_HOST="linux"
+export MY_SSH_DEFAULT_STARTDIR="/home/yhlinux"
+export MY_SSH_REMOTE_HOST=$MY_SSH_DEFAULT_HOST
+export MY_SSH_REMOTE_STARTDIR=$MY_SSH_DEFAULT_STARTDIR
 
 # Change remote host to arguments
 rh(){
@@ -58,8 +60,8 @@ rh(){
         return
     else
         if [ "reset" -e "$1" ]; then
-            echo "export MY_SSH_REMOTE_HOST=\"yhmac\"" > ~/.ssh/tempRemoteEnv.sh 
-            echo "export MY_SSH_REMOTE_STARTDIR=\"/Users/younghwan/\"" >> ~/.ssh/tempRemoteEnv.sh 
+            echo "export MY_SSH_REMOTE_HOST=$MY_SSH_DEFAULT_HOST" > ~/.ssh/tempRemoteEnv.sh 
+            echo "export MY_SSH_REMOTE_STARTDIR=$MY_SSH_DEFAULT_STARTDIR" >> ~/.ssh/tempRemoteEnv.sh 
             source ~/.ssh/tempRemoteEnv.sh
         else
             if [ -z "$2" ]; then
