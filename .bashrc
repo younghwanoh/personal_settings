@@ -17,7 +17,7 @@ show(){
 
 # Remote access
 export MY_SSH_DEFAULT_HOST="yhmac"
-export MY_SSH_DEFAULT_STARTDIR="/Users/younghwan"
+export MY_SSH_DEFAULT_STARTDIR="/Users/younghwan/"
 export MY_SSH_REMOTE_HOST=$MY_SSH_DEFAULT_HOST
 export MY_SSH_REMOTE_STARTDIR=$MY_SSH_DEFAULT_STARTDIR
 
