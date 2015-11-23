@@ -33,21 +33,6 @@ autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
 autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 
-" Ctags for caffe
-set tags+=/Users/younghwan/workspace/caffe/include/tags
-set tags+=/Users/younghwan/workspace/caffe/src/caffe/tags
-set tags+=/Users/younghwan/workspace/caffe/tools/tags
-
-" Ctags for gpgpusim
-" set tags+=/home/younghwan/gpgpu-sim/v3.x/libcuda/tags
-" set complete
-
-" Cscope for gpgpusim
-" set csprg=/usr/bin/cscope
-" set cst " use cscope
-" if filereadable("/home/younghwan/gpgpu-sim/v3.x/src/cscope.out")
-"   cs add /home/younghwan/gpgpu-sim/v3.x/src/cscope.out
-"   endif
 
 " Toolset end =============================================================================
 
@@ -100,17 +85,16 @@ set number
 syntax on
 autocmd BufEnter * :syntax sync fromstart
 " Syntax highlighting with tcomment
-  augroup filetype
-    au! BufRead,BufNewFile *.perl            set filetype=perl
-    au! BufRead,BufNewFile *.s            set filetype=llvm
-    au! BufRead,BufNewFile *Makefile*     set filetype=make
-    au! BufRead,BufNewFile *.dat          set filetype=dat
-    au! BufRead,BufNewFile *.log          set filetype=log
-    au! BufRead,BufNewFile *.cl           set filetype=opencl
-  augroup END
+augroup filetype
+  au! BufRead,BufNewFile *.perl              set filetype=perl
+  au! BufRead,BufNewFile *.s                 set filetype=llvm
+  au! BufRead,BufNewFile *Makefile*          set filetype=make
+  au! BufRead,BufNewFile *.{dat,csv,log}     set filetype=dat
+  au! BufRead,BufNewFile *.cl                set filetype=opencl
+  au! BufRead,BufNewFile *.tex               set filetype=tex
+augroup END
 call tcomment#DefineType('opencl', '// %s')
 call tcomment#DefineType('dat', '# %s')
-call tcomment#DefineType('log', '# %s')
 " Automatic commands
 if has("autocmd")
   " Enable file type detection
