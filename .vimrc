@@ -1,41 +1,3 @@
-" " Vundle start =============================================================================
-" set nocompatible              " be iMproved, required
-" filetype off                  " required
-"
-" " set the runtime path to include Vundle and initialize
-" set rtp+=~/.vim/bundle/Vundle.vim
-" call vundle#begin()
-"
-" " let Vundle manage Vundle, required
-" Plugin 'VundleVim/Vundle.vim'
-"
-" " All of your Plugins must be added before the following line
-" call vundle#end()            " required
-" filetype plugin indent on    " required
-"
-" " Brief help
-" " :PluginList       - lists configured plugins
-" " :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
-" " :PluginSearch foo - searches for foo; append `!` to refresh local cache
-" " :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
-"
-" " Vundle end ===============================================================================
-
-" Toolset start ============================================================================
-" Code completion
-cnoreabbrev t NeoCompleteToggle 
-let g:neocomplete#enable_at_startup = 0
-let g:neocomplete#enable_auto_select = 1
-let g:neocomplete#auto_completion_start_length = 3
-inoremap <expr><C-g>  neocomplete#undo_completion()
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-
-
-" Toolset end =============================================================================
-
 " Point the last line before termination
 au BufRead *
 			\ if line("'\"") > 0 && line("'\"") <= line("$") |
@@ -86,15 +48,18 @@ syntax on
 autocmd BufEnter * :syntax sync fromstart
 " Syntax highlighting with tcomment
 augroup filetype
-  au! BufRead,BufNewFile *.perl              set filetype=perl
-  au! BufRead,BufNewFile *.s                 set filetype=llvm
-  au! BufRead,BufNewFile *Makefile*          set filetype=make
-  au! BufRead,BufNewFile *.{dat,csv,log}     set filetype=dat
-  au! BufRead,BufNewFile *.cl                set filetype=opencl
-  au! BufRead,BufNewFile *.tex               set filetype=tex
+  au! BufRead,BufNewFile *.python       set filetype=python
+  au! BufRead,BufNewFile *.perl         set filetype=perl
+  au! BufRead,BufNewFile *.s            set filetype=llvm
+  au! BufRead,BufNewFile *Makefile*     set filetype=make
+  au! BufRead,BufNewFile *.dat          set filetype=dat
+  au! BufRead,BufNewFile *.log          set filetype=log
+  au! BufRead,BufNewFile *.cl           set filetype=opencl
 augroup END
 call tcomment#DefineType('opencl', '// %s')
 call tcomment#DefineType('dat', '# %s')
+call tcomment#DefineType('log', '# %s')
+call tcomment#DefineType('gp', '# %s')
 " Automatic commands
 if has("autocmd")
   " Enable file type detection
