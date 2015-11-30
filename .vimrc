@@ -53,12 +53,11 @@ augroup filetype
   au! BufRead,BufNewFile *.s            set filetype=llvm
   au! BufRead,BufNewFile *Makefile*     set filetype=make
   au! BufRead,BufNewFile *.dat          set filetype=dat
-  au! BufRead,BufNewFile *.log          set filetype=log
+  au! BufRead,BufNewFile *.log          set filetype=dat
   au! BufRead,BufNewFile *.cl           set filetype=opencl
 augroup END
 call tcomment#DefineType('opencl', '// %s')
 call tcomment#DefineType('dat', '# %s')
-call tcomment#DefineType('log', '# %s')
 call tcomment#DefineType('gp', '# %s')
 " Automatic commands
 if has("autocmd")
