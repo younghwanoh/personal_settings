@@ -12,17 +12,17 @@ color(){
   reset='\\e[0m'
 
   case $color in
-    [Rr]* ) index="red";    key='\\e[0;31m';;
-    [Gg]* ) index="green";  key='\\e[0;32m';;
-    [Yy]* ) index="yellow"; key='\\e[0;33m';;
-    [Bb]* ) index="blue";   key='\\e[0;34m';;
-    [Oo]* ) index="orange"; key='\\e[0;35m';;
-    [Pp]* ) index="purple"; key='\\e[0;36m';;
+    [Rr]* ) index="red";    key='\\e[1;31m';;
+    [Gg]* ) index="green";  key='\\e[1;32m';;
+    [Yy]* ) index="yellow"; key='\\e[1;33m';;
+    [Bb]* ) index="blue";   key='\\e[1;34m';;
+    [Oo]* ) index="orange"; key='\\e[1;35m';;
+    [Pp]* ) index="purple"; key='\\e[1;36m';;
   esac
 
   # Deprecate associative array for backward compatibility (bash < 3)
   # format=$(echo $format | sed -e "s/\(%-[0-9]*s\|%s\)/"${colorTable[$index]}"\1"${colorTable["reset"]}"/g")
-  format=$(echo "$format" | sed -e "s/\(%-[0-9]*s\|%s\)/"$key"\1"$reset"/g")
+  format=$(echo "$format" | sed -E "s/(%-[0-9]*s|%s)/"$key"\1"$reset"/g")
   printf "$format" "$text"
 }
 
