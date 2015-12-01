@@ -1,5 +1,7 @@
 #!/bin/bash
 
+. ~/bin/color.sh
+
 checkAndCopy(){
   if [ -e $3 ]; then
     printf '\e['1';'32'm%s\e[m' "$1"
@@ -24,8 +26,34 @@ if [ "$(uname -s)" == "Darwin" ] && [ "$1" == "package" ]; then
 elif [ "$(uname -s)" == "Linux" ] && [ "$1" == "package" ]; then
   echo "Install initial dependencies (Linux - apt)"
   sudo apt-get update
-	sudo apt-get install subversion openssh-server vim-gtk python-numpy xclip libgnome2-bin
+	sudo apt-get install subversion openssh-server vim-gtk python-numpy xclip libgnome2-bin screen g++
 fi 
+
+if [ "$(uname -s)" == "Linux" ] && [ "$1" == "jdk" ]; then
+  sudo add-apt-repository ppa:webupd8team/java
+  sudo apt-get update
+  sudo apt-get install oracle-java8-installer
+fi
+
+if [ "$(uname -s)" == "Linux" ] && [ "$1" == "cuda" ]; then
+  color "%s\n" "- Install NVIDIA Graphic driver" "y"
+  echo "\
+  1) Download matched driver manually (lspci -vnn | grep VGA -A 12)
+  2) sudo service lightdm stop
+  3) Ctrl + Alt + F1 (CLI mode - virtual terminal?)
+  4) Install NVIDIA driver with sudo"
+
+  color "\n%s\n" "- Install CUDA driver" "y"
+  echo "\
+  1) Download CUDA SDK
+  2) Install SDK only"
+
+  color "\n%s\n" "- Caution" "y"
+  echo "\
+  1) Don not install driver via nvidia-current
+  2) Don not install driver via CUDA SDK
+  "
+fi
 
 # Install custom settings
 if [ "$(uname -s)" == "Darwin" ] && [ "$1" == "init" ]; then
