@@ -21,19 +21,19 @@ color(){
   esac
 
   # Deprecate associative array for backward compatibility (bash < 3)
-  # format=$(echo $format | sed -e "s/%s/"${colorTable[$index]}"%s"${colorTable["reset"]}"/")
-  format="$(echo "$format" | sed -e "s/\(%-[0-9]*s\)/"$key"\1"$reset"/g")"
+  # format=$(echo $format | sed -e "s/\(%-[0-9]*s\|%s\)/"${colorTable[$index]}"\1"${colorTable["reset"]}"/g")
+  format=$(echo "$format" | sed -e "s/\(%-[0-9]*s\|%s\)/"$key"\1"$reset"/g")
   printf "$format" $text
 }
 
 main(){
-  color "This is red text: %-5s with format" "red" "r"
+  color "This is red text: %-10s with format" "red" "r"
   color ", and %s with format\n" "green" "g"
-  color "Green test      : %-5s after 5 words\n" "test" "g"
-  color "Purple test     : %-5s\n" "test" "p"
-  color "Yellow test     : %-5s\n" "test" "y"
-  color "Orange test     : %-5s\n" "test" "o"
-  color "Blue test       : %-5s\n" "test" "b"
+  color "Green test      : %-10s after 10 words\n" "test" "g"
+  color "Purple test     : %-10s\n" "test" "p"
+  color "Yellow test     : %-10s\n" "test" "y"
+  color "Orange test     : %-10s\n" "test" "o"
+  color "Blue test       : %-10s\n" "test" "b"
 }
 
 if [[ "$BASH_SOURCE" == "$0" ]]; then
