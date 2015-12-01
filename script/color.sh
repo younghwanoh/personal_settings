@@ -23,7 +23,7 @@ color(){
   # Deprecate associative array for backward compatibility (bash < 3)
   # format=$(echo $format | sed -e "s/\(%-[0-9]*s\|%s\)/"${colorTable[$index]}"\1"${colorTable["reset"]}"/g")
   format=$(echo "$format" | sed -e "s/\(%-[0-9]*s\|%s\)/"$key"\1"$reset"/g")
-  printf "$format" $text
+  printf "$format" "$text"
 }
 
 main(){
