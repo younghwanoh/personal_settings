@@ -2,7 +2,7 @@
 
 checkAndCopy(){
   if [ -e $3 ]; then
-    printf '\e['1';'32'm%s\e[m' $1
+    printf '\e['1';'32'm%s\e[m' "$1"
     printf ": file conflict detected !\n"
     read -p "Do you want to overwrite it ? [y/n]" ans
     case $ans in
@@ -58,6 +58,7 @@ elif [ "$(uname -s)" == "Linux" ] && [ "$1" == "init" ]; then
   checkAndCopy "bash_profile" ".bash_profile" "$HOME/.bash_profile"
   checkAndCopy "vimrc" ".vimrc" "$HOME/.vimrc"
   checkAndCopy "vim" ".vim" "$HOME/.vim"
+  checkAndCopy "lib color" "script/color.sh" "$HOME/bin/color.sh"
 
   source ~/.bashrc
 fi
