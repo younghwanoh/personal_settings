@@ -34,7 +34,8 @@ if [ "$(uname -s)" == "Darwin" ] && [ "$1" == "init" ]; then
 elif [ "$(uname -s)" == "Linux" ] && [ "$1" == "init" ]; then
   echo "Found Linux. Copy custom settings"
   if [ -z $HOME ]; then
-    echo "Set your home directory path to \$HOME"
+    echo "Error: Set your home directory path to \$HOME first!"
+    exit
   else
     printf 'Your home directory is\e['1';'32'm %s \e[m\n' "$HOME"
   fi
