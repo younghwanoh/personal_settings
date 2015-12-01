@@ -9,7 +9,12 @@ vmap r "_dP
 vmap "y "+y
 " vmap remote copy: vis plugin is needed to yank selected only
 " Download plugin @ http://vim.sourceforge.net/scripts/script.php?script_id=1195
-" vmap <C-c> :B w !cb<CR><CR>
+let host=$REMOTE_LOGIN
+if host == '1'
+  vmap <C-c> :B w !rcb<CR><CR>
+else
+  vmap <C-c> :B w !cb<CR><CR>
+endif
 " use 256 bit color
 let &t_Co=256
 " disable background color erase
