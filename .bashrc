@@ -7,6 +7,9 @@ export PYTHONSTARTUP=~/.pythonrc
 alias open="gnome-open"
 alias findreg="find . -regextype sed -regex"
 
+# Custom library
+. ~/bin/color.sh
+
 # Show segment of file
 show(){
     path="$1"
