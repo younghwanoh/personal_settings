@@ -6,10 +6,19 @@ declare -A colorTable 2> /dev/null
 colorTable=( ["red"]='\\e[0;31m' ["green"]='\\e[0;32m' ["yellow"]='\\e[0;33m' ["blue"]='\\e[0;34m' ["orange"]='\\e[0;35m' ["purple"]='\\e[0;36m' ["reset"]='\\e[0m')
 
 color(){
-  format="$1"
-  text="$2"
-  color="$3"
-  reset='\\e[0m'
+  if [ -z $3 ]; then
+    # 2 arguments
+    format="%s\n"
+    text="$1"
+    color="$2"
+    reset='\\e[0m'
+  else
+    # 3 arguments to format explicitly
+    format="$1"
+    text="$2"
+    color="$3"
+    reset='\\e[0m'
+  fi
 
   case $color in
     [Rr]* ) index="red";    key='\\e[1;31m';;
@@ -34,6 +43,7 @@ main(){
   color "Yellow test     : %-10s\n" "test" "y"
   color "Orange test     : %-10s\n" "test" "o"
   color "Blue test       : %-10s\n" "test" "b"
+  color "color with shortened two arguments <string> <color>" "b"
 }
 
 if [[ "$BASH_SOURCE" == "$0" ]]; then

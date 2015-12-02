@@ -36,12 +36,15 @@ if [ "$(uname -s)" == "Linux" ] && [ "$1" == "jdk" ]; then
 fi
 
 if [ "$(uname -s)" == "Linux" ] && [ "$1" == "cuda" ]; then
+  lspci -vnn | grep VGA -A 12
+  color "\n%s\n" "Here is the installation process !!" "g"
   color "%s\n" "- Install NVIDIA Graphic driver" "y"
   echo "\
-  1) Download matched driver manually (lspci -vnn | grep VGA -A 12)
+  1) Download matched driver manually
   2) sudo service lightdm stop
   3) Ctrl + Alt + F1 (CLI mode - virtual terminal?)
-  4) Install NVIDIA driver with sudo"
+  4) Install NVIDIA driver with sudo
+  5) add /usr/local/cuda/lib64:/usr/local/cuda/lib64/stubs to LD_LIBRARY_PATH"
 
   color "\n%s\n" "- Install CUDA driver" "y"
   echo "\
@@ -67,15 +70,23 @@ elif [ "$(uname -s)" == "Linux" ] && [ "$1" == "init" ]; then
   else
     printf 'Your home directory is\e['1';'32'm %s \e[m\n' "$HOME"
   fi
+
+  # DSA key generation
   if [ ! -e "$HOME/.ssh/id_dsa" ]; then
     ssh-keygen -t dsa
     eval "$(ssh-agent -s)"
     ssh-add ~/.ssh/id_dsa
+  else
+    color "Skip DSA key generation due to conflict" "b"
   fi
+
+  # RSA key generation
   if [ ! -e "$HOME/.ssh/id_rsa" ]; then
     ssh-keygen -t rsa -b 4096 -C "garion9013@gmail.com"
     eval "$(ssh-agent -s)"
     ssh-add ~/.ssh/id_rsa
+  else
+    color "Skip RSA key generation due to conflict" "b"
   fi
   mkdir ~/.subversion 2> /dev/null
 
@@ -87,6 +98,14 @@ elif [ "$(uname -s)" == "Linux" ] && [ "$1" == "init" ]; then
   checkAndCopy "vimrc" ".vimrc" "$HOME/.vimrc"
   checkAndCopy "vim" ".vim" "$HOME/.vim"
   checkAndCopy "lib color" "script/color.sh" "$HOME/bin/color.sh"
+  checkAndCopy "pythonrc" ".pythonrc" "$HOME/.pythonrc"
 
   source ~/.bashrc
+fi
+
+if [ -z "$1" ]; then
+  echo "Usage: install.sh package"
+  echo "       install.sh init"
+  echo "       install.sh cuda"
+  echo "       install.sh jdk"
 fi
