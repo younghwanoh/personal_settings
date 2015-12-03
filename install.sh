@@ -72,7 +72,7 @@ elif [ "$(uname -s)" == "Linux" ] && [ "$1" == "init" ]; then
   fi
 
   # DSA key generation
-  if [ ! -e "~/.ssh/id_dsa" ]; then
+  if [ ! -e ~/.ssh/id_dsa ]; then
     ssh-keygen -t dsa
     eval "$(ssh-agent -s)"
     ssh-add ~/.ssh/id_dsa
@@ -81,7 +81,7 @@ elif [ "$(uname -s)" == "Linux" ] && [ "$1" == "init" ]; then
   fi
 
   # RSA key generation
-  if [ ! -e "~/.ssh/id_rsa" ]; then
+  if [ ! -e ~/.ssh/id_rsa ]; then
     ssh-keygen -t rsa -b 4096 -C "garion9013@gmail.com"
     eval "$(ssh-agent -s)"
     ssh-add ~/.ssh/id_rsa
