@@ -1,6 +1,6 @@
 # default settings
 # ------------------------------------------------
-export PATH=$PATH:/home/yhlinux/bin
+export PATH=$PATH:/home/yhlinux/.local/bin
 export PYTHONSTARTUP=~/.pythonrc
 
 # Custom aliases
@@ -8,7 +8,7 @@ alias open="gnome-open"
 alias findreg="find . -regextype sed -regex"
 
 # Custom library
-. ~/bin/color.sh
+. ~/bin/.local/color.sh
 
 # Show segment of file
 show(){
@@ -65,23 +65,9 @@ rls(){
 # Webkit
 # export LD_LIBRARY_PATH=$LD_LIBRARY_PATH::~/papl-svn/projects/parallelJS/external/webkit-webcl/WebKitBuild/Dependencies/Root/lib64
 
-# LLVM 3.7
-export PATH=$PATH:/home/yhlinux/llvm/build/bin
-
-# cmake 3.3 manual install
-export PATH=/opt/cmake/bin:$PATH
-export JAVA_HOME=/usr/local/java/jdk1.8.0_60
-
 # CUDA 7.0
-export PATH=$PATH:/usr/local/cuda/bin
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda/lib64
-
-# ep.py
-export PYTHONPATH=$PYTHONPATH:~/ep-py
-
-# added by Anaconda 2.3.0 installer
-export PATH="/home/yhlinux/anaconda/bin:$PATH"
-export CMAKE_PREFIX_PATH=/home/yhlinux/anaconda/
+# export PATH=$PATH:/usr/local/cuda/bin
+# export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda/lib64
 
 # Aliases / functions leveraging the cb() function
 # ------------------------------------------------

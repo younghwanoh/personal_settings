@@ -1,6 +1,6 @@
 #!/bin/bash
 
-. ~/bin/color.sh
+. script/color.sh
 
 checkAndCopy(){
   if [ -e $3 ]; then
@@ -72,7 +72,7 @@ elif [ "$(uname -s)" == "Linux" ] && [ "$1" == "init" ]; then
   fi
 
   # DSA key generation
-  if [ ! -e "$HOME/.ssh/id_dsa" ]; then
+  if [ ! -e "~/.ssh/id_dsa" ]; then
     ssh-keygen -t dsa
     eval "$(ssh-agent -s)"
     ssh-add ~/.ssh/id_dsa
@@ -81,7 +81,7 @@ elif [ "$(uname -s)" == "Linux" ] && [ "$1" == "init" ]; then
   fi
 
   # RSA key generation
-  if [ ! -e "$HOME/.ssh/id_rsa" ]; then
+  if [ ! -e "~/.ssh/id_rsa" ]; then
     ssh-keygen -t rsa -b 4096 -C "garion9013@gmail.com"
     eval "$(ssh-agent -s)"
     ssh-add ~/.ssh/id_rsa
@@ -89,15 +89,17 @@ elif [ "$(uname -s)" == "Linux" ] && [ "$1" == "init" ]; then
     color "Skip RSA key generation due to conflict" "b"
   fi
   mkdir ~/.subversion 2> /dev/null
+  mkdir ~/.local 2> /dev/null
+  mkdir ~/.ssh 2> /dev/null
 
   checkAndCopy "ssh config" ".ssh/config" "$HOME/.ssh/config"
   checkAndCopy "svn config" ".subversion/config" "$HOME/.subversion/config"
-  checkAndCopy "bin" "bin" "$HOME/bin"
+  checkAndCopy "bin" ".local/bin" "$HOME/.local/bin"
   checkAndCopy "bash" ".bashrc" "$HOME/.bashrc"
   checkAndCopy "bash_profile" ".bash_profile" "$HOME/.bash_profile"
   checkAndCopy "vimrc" ".vimrc" "$HOME/.vimrc"
   checkAndCopy "vim" ".vim" "$HOME/.vim"
-  checkAndCopy "lib color" "script/color.sh" "$HOME/bin/color.sh"
+  checkAndCopy "lib color" "script/color.sh" "$HOME/.local/bin/color.sh"
   checkAndCopy "pythonrc" ".pythonrc" "$HOME/.pythonrc"
 
   source ~/.bashrc
