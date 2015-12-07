@@ -25,8 +25,8 @@ else
     echo "       echo <string> | cb"
   else
     # Copy input to clipboard (os x)
-    echo -n "$input" > ~/bin/temp
-    ssh yhmac $_clip < ~/bin/temp
+    echo -n "$input" > ~/.local/bin/temp
+    ssh yhmac $_clip < ~/.local/bin/temp
     # Truncate text for status
     if [ ${#input} -gt 80 ]; then input="$(echo $input | cut -c1-80)$_trn_col...\033[0m"; fi
     # Print status.
