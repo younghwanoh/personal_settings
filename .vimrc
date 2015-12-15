@@ -1,8 +1,39 @@
-" Point the last line before termination
-au BufRead *
-			\ if line("'\"") > 0 && line("'\"") <= line("$") |
-			\    exe "norm g'\"" |
-			\ endif
+" Enable syntax highlighting ============================================================
+syntax on
+autocmd BufEnter * :syntax sync fromstart
+" Syntax highlighting with tcomment
+augroup filetype
+  au! BufRead,BufNewFile *.python        set filetype=python
+  au! BufRead,BufNewFile *.perl          set filetype=perl
+  au! BufRead,BufNewFile *.s             set filetype=llvm
+  au! BufRead,BufNewFile *Makefile*      set filetype=make
+  au! BufRead,BufNewFile *.{dat,csv,log} set filetype=dat
+  au! BufRead,BufNewFile *.cl            set filetype=opencl
+  au! BufRead,BufNewFile *.gp            set filetype=gnuplot
+  au! BufRead,BufNewFile *.tex           set filetype=tex
+  au! BufRead,BufNewFile *.coffee        set filetype=coffee
+  au! BufNewFile,BufRead *.json          set filetype=javascript
+augroup END
+call tcomment#DefineType('opencl', '// %s')
+call tcomment#DefineType('dat', '# %s')
+call tcomment#DefineType('gp', '# %s')
+
+" file tpye plugins are enabled
+filetype plugin on
+
+" Syntax highlighting end ==============================================================
+
+" Make tabs as wide as two spaces
+set tabstop=2
+set softtabstop=2
+set expandtab
+set sw=2
+
+" Show “invisible” characters
+" set lcs=tab:▸\ ,trail:·,eol:¬,nbsp:_
+" set lcs=tab:▸\
+" set list
+
 " vmap paste and delete
 vmap r "_dP
 " vmap copy
@@ -40,52 +71,25 @@ let mapleader=","
 " Don’t add empty newlines at the end of files
 set binary
 set noeol
-" file tpye plugins are enabled
-filetype plugin on
 " Respect modeline in files
 set modeline
 set modelines=4
 " Enable line numbers
 set number
 
-" Enable syntax highlighting ============================================================
-syntax on
-autocmd BufEnter * :syntax sync fromstart
-" Syntax highlighting with tcomment
-augroup filetype
-  au! BufRead,BufNewFile *.python       set filetype=python
-  au! BufRead,BufNewFile *.perl         set filetype=perl
-  au! BufRead,BufNewFile *.s            set filetype=llvm
-  au! BufRead,BufNewFile *Makefile*     set filetype=make
-  au! BufRead,BufNewFile *.dat          set filetype=dat
-  au! BufRead,BufNewFile *.log          set filetype=dat
-  au! BufRead,BufNewFile *.cl           set filetype=opencl
-augroup END
-call tcomment#DefineType('opencl', '// %s')
-call tcomment#DefineType('dat', '# %s')
-call tcomment#DefineType('gp', '# %s')
-" Automatic commands
-if has("autocmd")
-  " Enable file type detection
-  filetype on
-  " Treat .json files as .js
-  autocmd BufNewFile,BufRead *.json setfiletype json syntax=javascript
-endif
-" Syntax highlighting end ==============================================================
+" To be sane paste behavior from GUI to Term
+let &t_SI .= "\<Esc>[?2004h"
+let &t_EI .= "\<Esc>[?2004l"
+inoremap <special> <expr> <Esc>[200~ XTermPasteBegin()
+
+function! XTermPasteBegin()
+  set pastetoggle=<Esc>[201~
+  set paste
+  return ""
+endfunction
 
 " Highlight current line
 set cursorline
-
-" Make tabs as wide as two spaces
-set tabstop=2
-set softtabstop=2
-set expandtab
-set sw=2
-
-" Show “invisible” characters
-" set lcs=tab:▸\ ,trail:·,eol:¬,nbsp:_
-" set lcs=tab:▸\
-" set list
 " Highlight searches
 set hlsearch
 " Ignore case of searches
@@ -108,3 +112,8 @@ set title
 set showcmd
 " Start scrolling three lines before the horizontal window border
 set scrolloff=3
+" Point the last line before termination
+au BufRead *
+			\ if line("'\"") > 0 && line("'\"") <= line("$") |
+			\    exe "norm g'\"" |
+			\ endif
