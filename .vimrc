@@ -21,7 +21,7 @@ call tcomment#DefineType('gp', '# %s')
 " file tpye plugins are enabled
 filetype plugin on
 
-" Syntax highlighting end ==============================================================
+" Syntax highlighting end ===========================================================
 
 " Make tabs as wide as two spaces
 set tabstop=2
@@ -34,12 +34,24 @@ set sw=2
 " set lcs=tab:▸\
 " set list
 
+" Map key to toggle opt ============================================================
+function MapToggle(key, opt)
+  let cmd = ':set '.a:opt.'! \| set '.a:opt."?\<CR>"
+  exec 'nnoremap '.a:key.' '.cmd
+  exec 'inoremap '.a:key." \<C-O>".cmd
+endfunction
+command -nargs=+ MapToggle call MapToggle(<f-args>)
+
+" number toggle
+MapToggle <C-z> nonumber
+
+" ==================================================================================
 " vmap paste and delete
 vmap r "_dP
 " vmap copy
 vmap "y "+y
-" vmap remote copy: vis plugin is needed to yank selected only
-" Download plugin @ http://vim.sourceforge.net/scripts/script.php?script_id=1195
+" vmap remote copy: vis plugin is needed to yank selected visual space.
+" Download the plugin @ http://vim.sourceforge.net/scripts/script.php?script_id=1195
 let host=$REMOTE_LOGIN
 if host == '1'
   vmap <C-c> :B w !rcb<CR><CR>
