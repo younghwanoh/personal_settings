@@ -36,14 +36,15 @@ set sw=2
 
 " Map key to toggle opt ============================================================
 function MapToggle(key, opt)
-  let cmd = ':set '.a:opt.'! \| set '.a:opt."?\<CR>"
-  exec 'nnoremap '.a:key.' '.cmd
-  exec 'inoremap '.a:key." \<C-O>".cmd
+  " Only allows this on visual mode, not for insert
+	let cmd = ':set '.a:opt.'! \| set '.a:opt."?\<CR>"
+	exec 'nnoremap '.a:key.' '.cmd
+	exec 'vnoremap '.a:key." \<C-O>".cmd
 endfunction
 command -nargs=+ MapToggle call MapToggle(<f-args>)
 
 " number toggle
-MapToggle <C-z> nonumber
+MapToggle \n nonumber
 
 " ==================================================================================
 " vmap paste and delete
