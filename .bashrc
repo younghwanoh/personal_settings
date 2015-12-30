@@ -8,7 +8,7 @@ alias open="gnome-open"
 alias findreg="find . -regextype sed -regex"
 
 # Custom library
-. ~/bin/.local/color.sh
+. ~/.local/bin/color.sh
 
 # Show segment of file
 show(){
