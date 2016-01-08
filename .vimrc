@@ -44,7 +44,7 @@ endfunction
 command -nargs=+ MapToggle call MapToggle(<f-args>)
 
 " number toggle
-MapToggle \n nonumber
+MapToggle '' nonumber
 
 " ==================================================================================
 " vmap paste and delete
