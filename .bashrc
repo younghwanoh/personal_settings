@@ -6,6 +6,7 @@ export PYTHONSTARTUP=~/.pythonrc
 # Custom aliases
 alias open="gnome-open"
 alias findreg="find . -regextype sed -regex"
+alias gls="git ls-tree -r master --name-only"
 
 # Custom library
 . ~/.local/bin/color.sh
