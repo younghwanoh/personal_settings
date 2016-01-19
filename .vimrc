@@ -5,6 +5,7 @@ autocmd BufEnter * :syntax sync fromstart
 augroup filetype
   au! BufRead,BufNewFile *.python        set filetype=python
   au! BufRead,BufNewFile *.perl          set filetype=perl
+  au! BufRead,BufNewFile *.bin           set filetype=bin
   au! BufRead,BufNewFile *.s             set filetype=llvm
   au! BufRead,BufNewFile *Makefile*      set filetype=make
   au! BufRead,BufNewFile *.{dat,csv,log} set filetype=dat
@@ -37,9 +38,9 @@ set sw=2
 " Map key to toggle opt ============================================================
 function MapToggle(key, opt)
   " Only allows this on visual mode, not for insert
-	let cmd = ':set '.a:opt.'! \| set '.a:opt."?\<CR>"
-	exec 'nnoremap '.a:key.' '.cmd
-	exec 'vnoremap '.a:key." \<C-O>".cmd
+  let cmd = ':set '.a:opt.'! \| set '.a:opt."?\<CR>"
+  exec 'nnoremap '.a:key.' '.cmd
+  exec 'vnoremap '.a:key." \<C-O>".cmd
 endfunction
 command -nargs=+ MapToggle call MapToggle(<f-args>)
 
@@ -127,6 +128,6 @@ set showcmd
 set scrolloff=3
 " Point the last line before termination
 au BufRead *
-			\ if line("'\"") > 0 && line("'\"") <= line("$") |
-			\    exe "norm g'\"" |
-			\ endif
+  \ if line("'\"") > 0 && line("'\"") <= line("$") |
+  \    exe "norm g'\"" |
+  \ endif
