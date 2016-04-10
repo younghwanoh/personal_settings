@@ -3,17 +3,17 @@ syntax on
 autocmd BufEnter * :syntax sync fromstart
 " Syntax highlighting with tcomment
 augroup filetype
-  au! BufRead,BufNewFile *.python        set filetype=python
-  au! BufRead,BufNewFile *.perl          set filetype=perl
-  au! BufRead,BufNewFile *.bin           set filetype=bin
-  au! BufRead,BufNewFile *.s             set filetype=llvm
-  au! BufRead,BufNewFile *Makefile*      set filetype=make
-  au! BufRead,BufNewFile *.{dat,csv,log} set filetype=dat
-  au! BufRead,BufNewFile *.cl            set filetype=opencl
-  au! BufRead,BufNewFile *.gp            set filetype=gnuplot
-  au! BufRead,BufNewFile *.tex           set filetype=tex
-  au! BufRead,BufNewFile *.coffee        set filetype=coffee
-  au! BufNewFile,BufRead *.json          set filetype=javascript
+  au! BufRead,BufNewFile *.python.*        set filetype=python
+  au! BufRead,BufNewFile *.perl.*          set filetype=perl
+  au! BufRead,BufNewFile *.bin.*           set filetype=bin
+  au! BufRead,BufNewFile *.s.*             set filetype=llvm
+  au! BufRead,BufNewFile *Makefile*        set filetype=make
+  au! BufRead,BufNewFile *.{dat,csv,log}.* set filetype=dat
+  au! BufRead,BufNewFile *.cl.*            set filetype=opencl
+  au! BufRead,BufNewFile *.gp.*            set filetype=gnuplot
+  au! BufRead,BufNewFile *.tex.*           set filetype=tex
+  au! BufRead,BufNewFile *.coffee.*        set filetype=coffee
+  au! BufNewFile,BufRead *.json.*          set filetype=javascript
 augroup END
 call tcomment#DefineType('opencl', '// %s')
 call tcomment#DefineType('dat', '# %s')
