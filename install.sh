@@ -53,8 +53,8 @@ if [ "$(uname -s)" == "Linux" ] && [ "$1" == "cuda" ]; then
 
   color "\n%s\n" "- Caution" "y"
   echo "\
-  1) Don not install driver via nvidia-current
-  2) Don not install driver via CUDA SDK
+  1) Do not install driver via nvidia-current
+  2) Do not install driver via CUDA SDK
   "
 fi
 
