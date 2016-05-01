@@ -58,6 +58,27 @@ if [ "$(uname -s)" == "Linux" ] && [ "$1" == "cuda" ]; then
   "
 fi
 
+if [ "$(uname -s)" == "Linux" ] && [ "$1" == "vim-bundle" ]; then
+  git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
+  ex -sc "1i|syntax on
+set nocompatible
+filetype off
+
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
+\" let Vundle manage Vundle
+\" \" required!
+Bundle 'gmarik/vundle'
+\" \" My bundles here:
+Bundle 'davidhalter/jedi-vim'
+
+filetype plugin indent on     \" required!
+
+" -cx ~/.vimrc
+
+  vi -c BundleInstall
+fi
+
 # Install custom settings
 if [ "$(uname -s)" == "Darwin" ] && [ "$1" == "init" ]; then
   echo "Found OS X. Copy custom settings"
@@ -108,6 +129,7 @@ fi
 if [ -z "$1" ]; then
   echo "Usage: install.sh package"
   echo "       install.sh init"
+  echo "       install.sh vim-bundle (after init)"
   echo "       install.sh cuda"
   echo "       install.sh jdk"
 fi
