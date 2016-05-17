@@ -1,6 +1,6 @@
 # default settings
 # ------------------------------------------------
-export PATH=$PATH:/home/yhlinux/.local/bin
+export PATH=$PATH:~/.local/bin
 export PYTHONSTARTUP=~/.pythonrc
 
 # Custom aliases
