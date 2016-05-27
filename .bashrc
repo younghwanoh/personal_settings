@@ -19,47 +19,6 @@ show(){
     tail -n +$X $path | head -n $((Y-X+1))
 }
 
-# Remote access
-export MY_SSH_DEFAULT_HOST="yhmac"
-export MY_SSH_DEFAULT_STARTDIR="/Users/younghwan/"
-export MY_SSH_REMOTE_HOST=$MY_SSH_DEFAULT_HOST
-export MY_SSH_REMOTE_STARTDIR=$MY_SSH_DEFAULT_STARTDIR
-
-# Change remote host to arguments
-rh(){
-    if [ -z "$1" ]; then
-        echo "Usage: changeRemoteHost [start dir] <remote host> "
-        printf "\nCurrent settings =====================\n"
-        echo "MY_SSHH_REMOTE_HOST = " $MY_SSH_REMOTE_HOST
-        echo "MY_SSHH_REMOTE_STARTDIR = " $MY_SSH_REMOTE_STARTDIR
-        return
-    else
-        if [ "reset" -e "$1" ]; then
-            echo "export MY_SSH_REMOTE_HOST=$MY_SSH_DEFAULT_HOST" > ~/.ssh/tempRemoteEnv.sh 
-            echo "export MY_SSH_REMOTE_STARTDIR=$MY_SSH_DEFAULT_STARTDIR" >> ~/.ssh/tempRemoteEnv.sh 
-            source ~/.ssh/tempRemoteEnv.sh
-        else
-            if [ -z "$2" ]; then
-                dir="/"
-            else
-                dir="$1"
-            fi
-            echo "export MY_SSH_REMOTE_HOST=\"$2\"" > ~/.ssh/tempRemoteEnv.sh 
-            echo "export MY_SSH_REMOTE_STARTDIR=\"$dir\"" >> ~/.ssh/tempRemoteEnv.sh 
-            source ~/.ssh/tempRemoteEnv.sh
-
-            printf "\nUpdated settings =====================\n"
-            echo "MY_SSHH_REMOTE_HOST = " $MY_SSH_REMOTE_HOST
-            echo "MY_SSHH_REMOTE_STARTDIR = " $MY_SSH_REMOTE_STARTDIR
-        fi
-    fi
-}
-
-# Change remote host to arguments
-rls(){
-    ssh $MY_SSH_REMOTE_HOST ls -l $MY_SSH_REMOTE_STARTDIR"$1"
-}
-
 # FOR INSTALLED PACKAGES
 # ------------------------------------------------
 

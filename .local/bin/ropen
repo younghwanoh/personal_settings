@@ -1,0 +1,4 @@
+#!/bin/bash
+
+scp $1 $REMOTE_HOST:~/.local/ropen_temporary
+ssh -t $REMOTE_HOST 'open ~/.local/ropen_temporary'
