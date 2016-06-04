@@ -1,4 +1,8 @@
 #!/bin/bash
 
-scp $1 $REMOTE_HOST:~/.local/ropen_temporary
-ssh -t $REMOTE_HOST 'open ~/.local/ropen_temporary'
+if [ $1 -z ]; then
+  echo "Usage: ropen <url>"
+else
+  scp $1 $REMOTE_HOST:~/.local/ropen_temporary
+  ssh -t $REMOTE_HOST 'open ~/.local/ropen_temporary'
+fi
