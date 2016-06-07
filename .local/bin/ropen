@@ -1,8 +1,13 @@
 #!/bin/bash
 
-if [ $1 -z ]; then
+if [ "$1" == "" ]; then
   echo "Usage: ropen <url>"
 else
-  scp $1 $REMOTE_HOST:~/.local/ropen_temporary
-  ssh -t $REMOTE_HOST 'open ~/.local/ropen_temporary'
+  if [ -e $1 ]; then
+    ssh -t $REMOTE_HOST 'rm ~/.local/temp/*'
+    scp "$1" $REMOTE_HOST:~/.local/temp/"$1"
+    ssh -t $REMOTE_HOST 'open ~/.local/temp/'"$1"
+  else
+    echo "Error: File \"$1\" does not exist!"
+  fi
 fi
