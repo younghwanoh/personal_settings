@@ -26,7 +26,7 @@ if [ "$(uname -s)" == "Darwin" ] && [ "$1" == "package" ]; then
 elif [ "$(uname -s)" == "Linux" ] && [ "$1" == "package" ]; then
   echo "Install initial dependencies (Linux - apt)"
   sudo apt-get update
-  sudo apt-get install subversion vim-gtk python-numpy xclip libgnome2-bin screen g++
+  sudo apt-get install subversion vim-gtk python-numpy xclip libgnome2-bin g++ openssh-server
 fi 
 
 if [ "$(uname -s)" == "Linux" ] && [ "$1" == "jdk" ]; then
@@ -112,6 +112,8 @@ elif [ "$(uname -s)" == "Linux" ] && [ "$1" == "init" ]; then
   mkdir ~/.subversion 2> /dev/null
   mkdir ~/.local 2> /dev/null
   mkdir ~/.ssh 2> /dev/null
+	mkdir ~/workspace 2> /dev/null
+	mkdir ~/Packages 2> /dev/null
 
   checkAndCopy "ssh config" ".ssh/config" "$HOME/.ssh/config"
   checkAndCopy "svn config" ".subversion/config" "$HOME/.subversion/config"

@@ -1,3 +1,3 @@
 #!/bin/bash
 
-rm -rf ~/.bashrc ~/.vimrc ~/.vim ~/bin ~/.subversion ~/.ssh
+rm -rf ~/.vimrc ~/.vim ~/bin ~/.subversion ~/.ssh
