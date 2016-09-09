@@ -10,7 +10,7 @@ checkAndCopy(){
     case $ans in
       [Yy]* ) printf '\e['1';'31'm%-6s\e[m\n\n' "Overwritten done !"; rm -rf $3;;
       [Nn]* ) printf '\e['1';'33'm%-6s\e[m %s\n\n' " Skip" "$3"; return;;
-      * ) echo "Please answer yes or no.";;
+		* ) color "%s\n\n" "Please answer yes or no." "r"; exit;;
     esac
   else
     printf '\e['1';'32'm%-50s %s\e[m\n' "$3" "Success !"
@@ -26,15 +26,31 @@ if [ "$(uname -s)" == "Darwin" ] && [ "$1" == "package" ]; then
 elif [ "$(uname -s)" == "Linux" ] && [ "$1" == "package" ]; then
   echo "Install initial dependencies (Linux - apt)"
   sudo apt-get update
-  sudo apt-get install subversion vim-gtk python-numpy xclip libgnome2-bin g++ openssh-server
+  sudo apt-get install subversion vim-gtk python-numpy python-matplotlib xclip libgnome2-bin g++ openssh-server
 fi 
 
+# JDK
 if [ "$(uname -s)" == "Linux" ] && [ "$1" == "jdk" ]; then
   sudo add-apt-repository ppa:webupd8team/java
   sudo apt-get update
   sudo apt-get install oracle-java8-installer
 fi
 
+# Up-to-date Git
+if [ "$(uname -s)" == "Linux" ] && [ "$1" == "git" ]; then
+	color "Up-to-date git version will be downloaded from ppa:git-core (16, Sep. 2.9.3)" "g"
+	read -p "Do you want to proceed ? [y/n]" ans
+	case $ans in
+		[Yy]* )	sudo add-apt-repository ppa:git-core/ppa -y;
+						sudo apt-get update;
+				  	sudo apt-get install git -y;;
+		[Nn]* ) ;;
+		* ) color "%s\n\n" "Please answer yes or no." "r"; exit;;
+	esac
+	color "%s\n" "`git --version`" "y"
+fi
+
+# CUDA
 if [ "$(uname -s)" == "Linux" ] && [ "$1" == "cuda" ]; then
   lspci -vnn | grep VGA -A 12
   color "\n%s\n" "Here is the installation process !!" "g"
@@ -58,6 +74,7 @@ if [ "$(uname -s)" == "Linux" ] && [ "$1" == "cuda" ]; then
   "
 fi
 
+# Jedi-vim, python code hint
 if [ "$(uname -s)" == "Linux" ] && [ "$1" == "vim-bundle" ]; then
   git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
   ex -sc "1i|syntax on
@@ -131,7 +148,8 @@ fi
 if [ -z "$1" ]; then
   echo "Usage: install.sh package"
   echo "       install.sh init"
-  echo "       install.sh vim-bundle (after init)"
+  echo "       install.sh git"
+  echo "       install.sh vim-bundle (jedi-vim: Python code hint, after init)"
   echo "       install.sh cuda"
   echo "       install.sh jdk"
 fi
