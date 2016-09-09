@@ -2,6 +2,7 @@
 # ------------------------------------------------
 export PATH=$PATH:~/.local/bin
 export PYTHONSTARTUP=~/.pythonrc
+export PYTHONPATH=~/workspace/ep-py
 
 # Custom aliases
 alias open="gnome-open"
@@ -22,12 +23,9 @@ show(){
 # FOR INSTALLED PACKAGES
 # ------------------------------------------------
 
-# Webkit
-# export LD_LIBRARY_PATH=$LD_LIBRARY_PATH::~/papl-svn/projects/parallelJS/external/webkit-webcl/WebKitBuild/Dependencies/Root/lib64
-
-# CUDA 7.0
-# export PATH=$PATH:/usr/local/cuda/bin
-# export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda/lib64
+# CUDA 7.5
+export PATH=$PATH:/usr/local/cuda/bin
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda/lib64
 
 # Aliases / functions leveraging the cb() function
 # ------------------------------------------------
