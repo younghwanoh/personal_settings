@@ -1,22 +1,36 @@
+" Default tab settings
+set tabstop=2
+set softtabstop=2
+set sw=2
+set expandtab
+
+" Show invisible marks
+" set lcs=tab:▸\ ,trail:·,eol:¬,nbsp:_
+" set lcs=tab:▸\ ,
+" set list
+
 " Enable syntax highlighting ============================================================
 syntax on
 autocmd BufEnter * :syntax sync fromstart
 " Syntax highlighting with tcomment
 augroup filetype
-  au! BufRead,BufNewFile *.python.*        set filetype=python
-  au! BufRead,BufNewFile *.perl.*          set filetype=perl
-  au! BufRead,BufNewFile *.bin.*           set filetype=bin
-  au! BufRead,BufNewFile *.s.*             set filetype=llvm
-  au! BufRead,BufNewFile *Makefile*        set filetype=make
-  au! BufRead,BufNewFile *.{dat,csv,log}.* set filetype=dat
-  au! BufRead,BufNewFile *.cl.*            set filetype=opencl
-  au! BufRead,BufNewFile *.gp.*            set filetype=gnuplot
-  au! BufRead,BufNewFile *.tex.*           set filetype=tex
-  au! BufRead,BufNewFile *.coffee.*        set filetype=coffee
-  au! BufNewFile,BufRead *.json.*          set filetype=javascript
+  au! BufRead,BufNewFile *.python.*            set filetype=python
+  au! BufRead,BufNewFile *.perl.*              set filetype=perl
+  au! BufRead,BufNewFile *.bin.*               set filetype=bin
+  au! BufRead,BufNewFile *.s.*                 set filetype=llvm
+  au! BufRead,BufNewFile *Makefile*            set filetype=make
+  au! BufRead,BufNewFile *.{dat,csv,log}.*     set filetype=dat
+  au! BufRead,BufNewFile *.{dat,csv,log}       set filetype=dat
+  au! BufRead,BufNewFile *.prototxt            set filetype=prototxt
+  au! BufRead,BufNewFile *.cl.*                set filetype=opencl
+  au! BufRead,BufNewFile *.gp.*                set filetype=gnuplot
+  au! BufRead,BufNewFile *.tex.*               set filetype=tex
+  au! BufRead,BufNewFile *.coffee.*            set filetype=coffee
+  au! BufNewFile,BufRead *.json.*              set filetype=javascript
 augroup END
 call tcomment#DefineType('opencl', '// %s')
 call tcomment#DefineType('dat', '# %s')
+call tcomment#DefineType('prototxt', '# %s')
 call tcomment#DefineType('gp', '# %s')
 
 " file tpye plugins are enabled
@@ -24,18 +38,7 @@ filetype plugin on
 
 " Syntax highlighting end ===========================================================
 
-" Make tabs as wide as two spaces
-set tabstop=2
-set softtabstop=2
-set expandtab
-set sw=2
-
-" Show “invisible” characters
-" set lcs=tab:▸\ ,trail:·,eol:¬,nbsp:_
-" set lcs=tab:▸\
-" set list
-
-" Map key to toggle opt ============================================================
+" Map key to toggle something =======================================================
 function MapToggle(key, opt)
   " Only allows this on visual mode, not for insert
   let cmd = ':set '.a:opt.'! \| set '.a:opt."?\<CR>"
