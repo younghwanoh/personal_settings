@@ -1,10 +1,76 @@
-export REMOTE_LOGIN=1
-export REMOTE_HOST=yhmac
+# -----------------------------------------------------------------------------------
+# External libraries
+# -----------------------------------------------------------------------------------
+# - For cuDNN
+export DYLD_LIBRARY_PATH=$DYLD_LIBRARY_PATH:/usr/local/cuda/cudnn
 
-alias cb=rcb
-alias cbf=rcbf
+# - For CUDA
+export DYLD_LIBRARY_PATH=$DYLD_LIBRARY_PATH:/usr/local/cuda/lib
 
-# Load bashrc at ssh login
-if [ -f ~/.bashrc ]; then
-  . ~/.bashrc
-fi
+# - For CUPTI
+export DYLD_LIBRARY_PATH=$DYLD_LIBRARY_PATH:/usr/local/cuda/extras/CUPTI/lib
+
+# - Path
+export PATH=~/.local/bin:/usr/local/cuda/bin:$PATH
+
+# - Enable Anaconda python
+# export PATH=~/anaconda/bin:$PATH
+
+# Quiver to HTML translation script
+export PATH=$PATH:/Users/younghwan/.local/quiver2html/bin
+
+# -----------------------------------------------------------------------------------
+# Internally used env
+# -----------------------------------------------------------------------------------
+
+# pythonrc for auto-complete
+export PYTHONSTARTUP=~/.pythonrc
+export PYTHONPATH=$PYTHONPATH:~/workspace/ep-py
+
+# Select SVN editor
+export SVN_EDITOR=vi
+
+# Enable Highlighting of bash shell
+export CLICOLOR=1
+
+# Homebrew setup
+# ------------------------------------------------
+# vi -> vim 7.4 (clipboard enabled)
+alias vi='/usr/local/Cellar/vim/7.4.712/bin/vim'
+alias vim='/usr/local/Cellar/vim/7.4.712/bin/vim'
+
+# Ctags binary 5.8 homebrew version
+alias ctags='/usr/local/bin/ctags'
+
+# ssh through tmux
+alias new="tmux-command new"
+alias attach="tmux-command attach"
+alias fwd="ssh -L8888:127.0.0.1:8888 server -t 'ssh -L8888:127.0.0.1:8888 yhlinux'"
+
+# Custom instructions
+alias lt='ls -alt'
+alias l='ls'
+alias grep='grep --color'
+alias gl="git log --oneline"
+alias svnup='svn up --depth empty'
+alias portscan="/System/Library/CoreServices/Applications/Network\ Utility.app/Contents/Resources/stroke"
+
+# Aliases / functions leveraging the cb() function
+# ------------------------------------------------
+# Copy SSH public key
+alias cbssh="cbf ~/.ssh/id_rsa.pub"  
+# Copy current working directory
+alias cbwd="pwd | cb"  
+# Copy most recent command in bash history
+alias cbhs="cat $HISTFILE | tail -n 1 | cb"
+
+# Custom library
+. ~/.local/bin/color.sh
+
+# Show segment of file
+show(){
+    path="$1"
+    X=$2
+    Y=$3
+    tail -n +$X $path | head -n $((Y-X+1))
+}
