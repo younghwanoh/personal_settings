@@ -142,6 +142,15 @@ elif [ "$(uname -s)" == "Linux" ] && [ "$1" == "init" ]; then
   checkAndCopy "lib color" "script/color.sh" "$HOME/.local/bin/color.sh"
   checkAndCopy "pythonrc" ".pythonrc" "$HOME/.pythonrc"
 
+	# SSH home variable settings
+	sudo echo "SendEnv SSH_HOME" >> ~/.ssh/config
+	if [ -f /etc/ssh/sshd_config ]; than
+		sudo echo "AcceptEnv SSH_HOME" >> /etc/ssh/sshd_config
+	else
+		echo "SSH_HOME variable cannot be set, install openssh-server. Then, add "AcceptEnv SSH_HOME" to /etc/ssh/sshd_config"
+	fi
+	sudo service ssh restart
+
   source ~/.bashrc
 fi
 

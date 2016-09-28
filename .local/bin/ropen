@@ -1,12 +1,16 @@
 #!/bin/bash
 
+if [ -n "$TMUX" ]; then
+		export $(tmux show-environment | grep "^SSH_HOME")
+fi
+
 if [ "$1" == "" ]; then
   echo "Usage: ropen <url>"
 else
   if [ -e $1 ]; then
-    ssh -t $REMOTE_HOST 'rm ~/.local/temp/*'
-    scp "$1" $REMOTE_HOST:~/.local/temp/"$1"
-    ssh -t $REMOTE_HOST 'open ~/.local/temp/'"$1"
+    ssh -t $SSH_HOME 'rm ~/.local/temp/*'
+    scp "$1" $SSH_HOME:~/.local/temp/"$1"
+    ssh -t $SSH_HOME 'open ~/.local/temp/'"$1"
   else
     echo "Error: File \"$1\" does not exist!"
   fi
