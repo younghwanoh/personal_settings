@@ -132,6 +132,7 @@ elif [ "$(uname -s)" == "Linux" ] && [ "$1" == "init" ]; then
 	mkdir ~/workspace 2> /dev/null
 	mkdir ~/Packages 2> /dev/null
 
+  checkAndCopy "tmux config" ".tmux.conf" "$HOME/.tmux.conf"
   checkAndCopy "ssh config" ".ssh/config" "$HOME/.ssh/config"
   checkAndCopy "svn config" ".subversion/config" "$HOME/.subversion/config"
   checkAndCopy "bin" ".local/bin" "$HOME/.local/bin"
@@ -146,10 +147,13 @@ elif [ "$(uname -s)" == "Linux" ] && [ "$1" == "init" ]; then
 	sudo echo "SendEnv SSH_HOME" >> ~/.ssh/config
 	if [ -f /etc/ssh/sshd_config ]; than
 		sudo echo "AcceptEnv SSH_HOME" >> /etc/ssh/sshd_config
+		sudo service ssh restart
 	else
-		echo "SSH_HOME variable cannot be set, install openssh-server. Then, add "AcceptEnv SSH_HOME" to /etc/ssh/sshd_config"
+		color "%s variable cannot be set, install openssh-server.\n" "SSH_HOME" "b"
+		color "Then, add %s to " "'AcceptEnv SSH_HOME'" "r"
+		color "/etc/ssh/sshd_config" "y"
+		exit
 	fi
-	sudo service ssh restart
 
   source ~/.bashrc
 fi

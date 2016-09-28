@@ -31,7 +31,7 @@ else
   else
     # Copy input to clipboard (os x)
     echo -n "$input" > ~/.local/bin/temp
-    ssh $yhmac $_clip < ~/.local/bin/temp
+    ssh $SSH_HOME $_clip < ~/.local/bin/temp
     # Truncate text for status
     if [ ${#input} -gt 80 ]; then input="$(echo $input | cut -c1-80)$_trn_col...\033[0m"; fi
     # Print status.

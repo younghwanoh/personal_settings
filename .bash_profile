@@ -42,10 +42,17 @@ alias vim='/usr/local/Cellar/vim/7.4.712/bin/vim'
 # Ctags binary 5.8 homebrew version
 alias ctags='/usr/local/bin/ctags'
 
-# ssh through tmux
+# Initial assignment for SSH_HOME
+export SSH_HOME="void"
+
+# SSH-related command to linux server
 alias new="tmux-command new"
 alias attach="tmux-command attach"
-alias fwd="ssh -L8888:127.0.0.1:8888 server -t 'ssh -L8888:127.0.0.1:8888 yhlinux'"
+fwd(){
+	export SSH_HOME=younghwan@`curl -s myip.dnsomatic.com`
+	ssh -L8888:127.0.0.1:8888 server -t 'ssh -L8888:127.0.0.1:8888 yhlinux'
+}
+
 
 # Custom instructions
 alias lt='ls -alt'

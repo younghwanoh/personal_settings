@@ -4,10 +4,19 @@ export PATH=$PATH:~/.local/bin
 export PYTHONSTARTUP=~/.pythonrc
 export PYTHONPATH=~/workspace/ep-py
 
+# Select SVN editor
+export SVN_EDITOR=vi
+
+# Enable Highlighting of bash shell
+export CLICOLOR=1
+
 # Custom aliases
 alias open="gnome-open"
 alias findreg="find . -regextype sed -regex"
+alias gl="git log --oneline"
 alias gls="git ls-tree -r master --name-only"
+alias grep='grep --color'
+alias svnup='svn up --depth empty'
 
 # Custom library
 . ~/.local/bin/color.sh

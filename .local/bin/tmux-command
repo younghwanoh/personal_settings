@@ -1,6 +1,7 @@
 #!/bin/bash
-myip=`curl -s myip.dnsomatic.com`
-echo "IP address of my computer: $myip"
+
+SSH_HOME=younghwan@`curl -s myip.dnsomatic.com`
+echo "Address of my computer: $SSH_HOME"
 
 if [[ $myip =~ ^147\.46\.[0-9]{1,3}\.[0-9]{1,3}$ ]]; then
 	ssh -t linux "tmux -CC $1"
