@@ -48,9 +48,20 @@ export SSH_HOME="void"
 # SSH-related command to linux server
 alias new="tmux-command new"
 alias attach="tmux-command attach"
+
+# Port forwarded SSH for running Jupyter remotely
 fwd(){
 	export SSH_HOME=younghwan@`curl -s myip.dnsomatic.com`
 	ssh -L8888:127.0.0.1:8888 server -t 'ssh -L8888:127.0.0.1:8888 yhlinux'
+}
+
+# Remote Keylink on/off
+key(){
+	if [ "$1" == "on" ]; then
+		ssh linux -t "keylink on"
+	else
+		ssh linux -t "keylink off"
+	fi
 }
 
 
@@ -59,6 +70,7 @@ alias lt='ls -alt'
 alias l='ls'
 alias grep='grep --color'
 alias gl="git log --oneline"
+alias gls="git ls-tree -r master --name-only"
 alias svnup='svn up --depth empty'
 alias portscan="/System/Library/CoreServices/Applications/Network\ Utility.app/Contents/Resources/stroke"
 
