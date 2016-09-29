@@ -2,7 +2,7 @@
 
 if [ "$1" == "on" ]; then
     if [ -z "$2" ]; then
-        target=115.145.211.205
+        target=147.46.174.149
     else
         target=$2
     fi
