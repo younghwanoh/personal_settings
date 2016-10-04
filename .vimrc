@@ -57,8 +57,8 @@ vmap r "_dP
 vmap "y "+y
 " vmap remote copy: vis plugin is needed to yank selected visual space.
 " Download the plugin @ http://vim.sourceforge.net/scripts/script.php?script_id=1195
-let host=$REMOTE_LOGIN
-if host == '1'
+let host=$SSH_HOME
+if host != ''
   vmap <C-c> :B w !rcb<CR><CR>
 else
   vmap <C-c> :B w !cb<CR><CR>
@@ -86,7 +86,6 @@ set encoding=utf-8 nobomb
 " Change mapleader
 let mapleader=","
 " Don’t add empty newlines at the end of files
-set binary
 set noeol
 " Respect modeline in files
 set modeline

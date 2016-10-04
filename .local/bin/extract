@@ -1,59 +1,57 @@
 #!/bin/bash
 
-# Currently supported extensions
-# tar.bz2
-# tar.gz
-# tgz
-# tar
+# Usage:
+# extract <target> <output_path>
+# extract <target1> <target2> ...
 
 # arguments > 2, extract all arguments
 if [[ $# -gt 2 ]]; then
     for first in $@; do
-	echo $first
-	ext1="${first##*.}"   # first extension
-	second="${first%.*}" 
-	ext2="${second##*.}"  # second extension
-	name="${second%.*}"   # filename or empty
-	# echo $name, $ext2
+        echo $first
+        ext1="${first##*.}"   # first extension
+        second="${first%.*}" 
+        ext2="${second##*.}"  # second extension
+        name="${second%.*}"   # filename or empty
+        # echo $name, $ext2
 
-	if [ "$ext1" == "bz2" ] && [ "$ext2" == "tar" ]; then
-	    echo "Extract tar.bz2"
-	    if [ ! -e $name ]; then
-		echo "Create new folder"
-		mkdir $name
-	    fi
-	    tar -jxvf $first -C `pwd`/$name
-	elif [ "$ext1" == "gz" ] && [ "$ext2" == "tar" ]; then
-	    echo "Extract tar.gz"
-	    if [ ! -e $name ]; then
-		echo "Create new folder"
-		mkdir $name
-	    fi
-	    tar -zxvf $first -C `pwd`/$name
-	elif [ "$ext1" == "xz" ] && [ "$ext2" == "tar" ]; then
-	    echo "Extract tar.xz"
-	    if [ ! -e $name ]; then
-		echo "Create new folder"
-		mkdir $name
-	    fi
-	    tar xz $first -C `pwd`/$name
-	elif [ "$ext1" == "tgz" ] && [ "$ext2" != "gz" ]; then
-	    echo "Extract tgz"
-	    if [ ! -e $ext2 ]; then
-		echo "Create new folder"
-		mkdir $ext2
-	    fi
-	    tar -zxvf $first -C `pwd`/$ext2
-	elif [ "$ext1" == "tar" ] && [ "$ext2" != "gz" ]; then
-	    echo "Extract tar"
-	    if [ ! -e $ext2 ]; then
-		echo "Create new folder"
-		mkdir $ext2
-	    fi
-	    tar -xopf $first -C `pwd`/$ext2
-	else
-	    echo "No matched target"
-	fi
+        if [ "$ext1" == "bz2" ] && [ "$ext2" == "tar" ]; then
+            echo "Extract tar.bz2"
+            if [ ! -e $name ]; then
+                echo "Create new folder"
+                mkdir $name
+            fi
+            tar -jxvf $first -C `pwd`/$name
+        elif [ "$ext1" == "gz" ] && [ "$ext2" == "tar" ]; then
+            echo "Extract tar.gz"
+            if [ ! -e $name ]; then
+                echo "Create new folder"
+                mkdir $name
+            fi
+            tar -zxvf $first -C `pwd`/$name
+        elif [ "$ext1" == "xz" ] && [ "$ext2" == "tar" ]; then
+            echo "Extract tar.xz"
+            if [ ! -e $name ]; then
+                echo "Create new folder"
+                mkdir $name
+            fi
+            tar xz $first -C `pwd`/$name
+        elif [ "$ext1" == "tgz" ] && [ "$ext2" != "gz" ]; then
+            echo "Extract tgz"
+            if [ ! -e $ext2 ]; then
+                echo "Create new folder"
+                mkdir $ext2
+            fi
+            tar -zxvf $first -C `pwd`/$ext2
+        elif [ "$ext1" == "tar" ] && [ "$ext2" != "gz" ]; then
+            echo "Extract tar"
+            if [ ! -e $ext2 ]; then
+                echo "Create new folder"
+                mkdir $ext2
+            fi
+            tar -xopf $first -C `pwd`/$ext2
+        else
+            echo "No matched target"
+        fi
     done
 else
 # arguments <= 2, extract file to denoted directory($2)
@@ -63,21 +61,21 @@ else
     ext2="${second##*.}"  # second extension
 
     if [ "$ext1" == "bz2" ] && [ "$ext2" == "tar" ]; then
-	echo "Extract tar.bz2"
-	tar -jxvf $1 -C $2
+        echo "Extract tar.bz2"
+        tar -jxvf $1 -C $2
     elif [ "$ext1" == "gz" ] && [ "$ext2" == "tar" ]; then
-	echo "Extract tar.gz"
-	tar -zxvf $1 -C $2
+        echo "Extract tar.gz"
+        tar -zxvf $1 -C $2
     elif [ "$ext1" == "xz" ] && [ "$ext2" == "tar" ]; then
-	echo "Extract tar.xz"
-	tar xf $1 -C $2
+        echo "Extract tar.xz"
+        tar xf $1 -C $2
     elif [ "$ext1" == "tgz" ] && [ "$ext2" != "gz" ]; then
-	echo "Extract tgz"
-	tar xvzf $1 -C $2
+        echo "Extract tgz"
+        tar xvzf $1 -C $2
     elif [ "$ext1" == "tar" ] && [ "$ext2" != "gz" ]; then
-	echo "Extract tar"
-	tar -xopf $1 -C $2
+        echo "Extract tar"
+        tar -xopf $1 -C $2
     else
-	echo "No matched target"
+        echo "No matched target"
     fi
 fi
