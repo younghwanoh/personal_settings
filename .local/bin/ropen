@@ -8,7 +8,7 @@ if [ "$1" == "" ]; then
   echo "Usage: ropen <url>"
 else
   if [ -e $1 ]; then
-    ssh -t $SSH_HOME 'rm ~/.local/temp/*'
+    ssh -t $SSH_HOME 'rm -rf ~/.local/temp/*'
     scp "$1" $SSH_HOME:~/.local/temp/"$1"
     ssh -t $SSH_HOME 'open ~/.local/temp/'"$1"
   else
