@@ -2,7 +2,7 @@
 # ------------------------------------------------
 export PATH=$PATH:~/.local/bin
 export PYTHONSTARTUP=~/.pythonrc
-export PYTHONPATH=~/workspace/ep-py
+export PYTHONPATH=$PYTHONPATH:~/workspace/ep-py:~/.local/mylib
 
 # Select SVN editor
 export SVN_EDITOR=vi

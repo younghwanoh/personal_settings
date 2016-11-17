@@ -25,7 +25,7 @@ export PATH=$PATH:/Users/younghwan/.local/quiver2html/bin
 
 # pythonrc for auto-complete
 export PYTHONSTARTUP=~/.pythonrc
-export PYTHONPATH=$PYTHONPATH:~/workspace/ep-py
+export PYTHONPATH=$PYTHONPATH:~/workspace/ep-py:~/.local/mylib
 
 # Select SVN editor
 export SVN_EDITOR=vi

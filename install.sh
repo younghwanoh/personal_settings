@@ -136,6 +136,7 @@ elif [ "$(uname -s)" == "Linux" ] && [ "$1" == "init" ]; then
   checkAndCopy "ssh config" ".ssh/config" "$HOME/.ssh/config"
   checkAndCopy "svn config" ".subversion/config" "$HOME/.subversion/config"
   checkAndCopy "bin" ".local/bin" "$HOME/.local/bin"
+  checkAndCopy "mylib" ".local/mylib" "$HOME/.local/mylib"
   checkAndCopy "bash" ".bashrc" "$HOME/.bashrc"
   checkAndCopy "bash_profile" ".bash_profile" "$HOME/.bash_profile"
   checkAndCopy "vimrc" ".vimrc" "$HOME/.vimrc"
