@@ -4,7 +4,8 @@
 # 1: attach / new
 # 2: session number
 
-SSH_HOME=younghwan@`curl -s myip.dnsomatic.com`
+myip=`curl -s myip.dnsomatic.com`
+SSH_HOME=younghwan@$myip
 echo "Address of my computer: $SSH_HOME"
 if [ -z $2 ]; then
 	COM="tmux -CC $1"
@@ -13,7 +14,9 @@ else
 fi
 
 if [[ $myip =~ ^147\.46\.[0-9]{1,3}\.[0-9]{1,3}$ ]]; then
+	echo "Local connection!"
 	ssh -t linux "$COM"
 else
+	echo "External connection!"
 	ssh -t server "ssh -t yhlinux '$COM'"
 fi
