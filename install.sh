@@ -146,7 +146,7 @@ elif [ "$(uname -s)" == "Linux" ] && [ "$1" == "init" ]; then
 
 	# SSH home variable settings
 	sudo echo "SendEnv SSH_HOME" >> ~/.ssh/config
-	if [ -f /etc/ssh/sshd_config ]; than
+	if [ -f /etc/ssh/sshd_config ]; then
 		sudo echo "AcceptEnv SSH_HOME" >> /etc/ssh/sshd_config
 		sudo service ssh restart
 	else
