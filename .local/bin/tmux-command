@@ -2,10 +2,10 @@
 
 # Arguments
 # 1: attach / new
-# 2: -t|--titan titan or not
-# 3: -s|--sess session number
+# 2: session number
 
 sessid=false
+titan=false
 while [ $# -gt 0 ]; do
   case "$2" in
     -h|--help)
