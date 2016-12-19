@@ -1,7 +1,7 @@
 #!/bin/bash
 
 if [ -n "$TMUX" ]; then
-		export $(tmux show-environment | grep "^SSH_HOME")
+  export $(tmux show-environment | grep "^SSH_HOME")
 fi
 
 _scs_col='\033[00;32m'; _wrn_col='\033[01;31m'; _trn_col='\033[00;33m';

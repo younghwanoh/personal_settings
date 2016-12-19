@@ -10,7 +10,7 @@ checkAndCopy(){
     case $ans in
       [Yy]* ) printf '\e['1';'31'm%-6s\e[m\n\n' "Overwritten done !"; rm -rf $3;;
       [Nn]* ) printf '\e['1';'33'm%-6s\e[m %s\n\n' " Skip" "$3"; return;;
-		* ) color "%s\n\n" "Please answer yes or no." "r"; exit;;
+    * ) color "%s\n\n" "Please answer yes or no." "r"; exit;;
     esac
   else
     printf '\e['1';'32'm%-50s %s\e[m\n' "$3" "Success !"
@@ -38,16 +38,16 @@ fi
 
 # Up-to-date Git
 if [ "$(uname -s)" == "Linux" ] && [ "$1" == "git" ]; then
-	color "Up-to-date git version will be downloaded from ppa:git-core (16, Sep. 2.9.3)" "g"
-	read -p "Do you want to proceed ? [y/n]" ans
-	case $ans in
-		[Yy]* )	sudo add-apt-repository ppa:git-core/ppa -y;
-						sudo apt-get update;
-				  	sudo apt-get install git -y;;
-		[Nn]* ) ;;
-		* ) color "%s\n\n" "Please answer yes or no." "r"; exit;;
-	esac
-	color "%s\n" "`git --version`" "y"
+  color "Up-to-date git version will be downloaded from ppa:git-core (16, Sep. 2.9.3)" "g"
+  read -p "Do you want to proceed ? [y/n]" ans
+  case $ans in
+    [Yy]* ) sudo add-apt-repository ppa:git-core/ppa -y;
+            sudo apt-get update;
+            sudo apt-get install git -y;;
+    [Nn]* ) ;;
+    * ) color "%s\n\n" "Please answer yes or no." "r"; exit;;
+  esac
+  color "%s\n" "`git --version`" "y"
 fi
 
 # CUDA
@@ -129,8 +129,8 @@ elif [ "$(uname -s)" == "Linux" ] && [ "$1" == "init" ]; then
   mkdir ~/.subversion 2> /dev/null
   mkdir ~/.local 2> /dev/null
   mkdir ~/.ssh 2> /dev/null
-	mkdir ~/workspace 2> /dev/null
-	mkdir ~/Packages 2> /dev/null
+  mkdir ~/workspace 2> /dev/null
+  mkdir ~/Packages 2> /dev/null
 
   checkAndCopy "tmux config" ".tmux.conf" "$HOME/.tmux.conf"
   checkAndCopy "ssh config" ".ssh/config" "$HOME/.ssh/config"
@@ -144,17 +144,17 @@ elif [ "$(uname -s)" == "Linux" ] && [ "$1" == "init" ]; then
   checkAndCopy "lib color" "script/color.sh" "$HOME/.local/bin/color.sh"
   checkAndCopy "pythonrc" ".pythonrc" "$HOME/.pythonrc"
 
-	# SSH home variable settings
-	sudo echo "SendEnv SSH_HOME" >> ~/.ssh/config
-	if [ -f /etc/ssh/sshd_config ]; then
-		sudo echo "AcceptEnv SSH_HOME" >> /etc/ssh/sshd_config
-		sudo service ssh restart
-	else
-		color "%s variable cannot be set, install openssh-server.\n" "SSH_HOME" "b"
-		color "Then, add %s to " "'AcceptEnv SSH_HOME'" "r"
-		color "/etc/ssh/sshd_config" "y"
-		exit
-	fi
+  # SSH home variable settings
+  sudo echo "SendEnv SSH_HOME" >> ~/.ssh/config
+  if [ -f /etc/ssh/sshd_config ]; then
+    sudo echo "AcceptEnv SSH_HOME" >> /etc/ssh/sshd_config
+    sudo service ssh restart
+  else
+    color "%s variable cannot be set, install openssh-server.\n" "SSH_HOME" "b"
+    color "Then, add %s to " "'AcceptEnv SSH_HOME'" "r"
+    color "/etc/ssh/sshd_config" "y"
+    exit
+  fi
 
   source ~/.bashrc
 fi

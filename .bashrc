@@ -23,10 +23,10 @@ alias svnup='svn up --depth empty'
 
 # Show segment of file
 show(){
-    path="$1"
-    X=$2
-    Y=$3
-    tail -n +$X $path | head -n $((Y-X+1))
+  path="$1"
+  X=$2
+  Y=$3
+  tail -n +$X $path | head -n $((Y-X+1))
 }
 
 # FOR INSTALLED PACKAGES
@@ -95,12 +95,12 @@ esac
 
 if [ -n "$force_color_prompt" ]; then
     if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
-	# We have color support; assume it's compliant with Ecma-48
-	# (ISO/IEC-6429). (Lack of such support is extremely rare, and such
-	# a case would tend to support setf rather than setaf.)
-	color_prompt=yes
+  # We have color support; assume it's compliant with Ecma-48
+  # (ISO/IEC-6429). (Lack of such support is extremely rare, and such
+  # a case would tend to support setf rather than setaf.)
+  color_prompt=yes
     else
-	color_prompt=
+  color_prompt=
     fi
 fi
 

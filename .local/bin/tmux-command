@@ -2,7 +2,8 @@
 
 # Arguments
 # 1: attach / new
-# 2: session number
+# 2: -t|--titan titan or not
+# 3: -s|--sess session number
 
 sessid=false
 while [ $# -gt 0 ]; do

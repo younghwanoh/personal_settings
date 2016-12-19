@@ -51,17 +51,17 @@ alias attach="tmux-command attach"
 
 # Port forwarded SSH for running Jupyter remotely
 fwd(){
-	export SSH_HOME=younghwan@`curl -s myip.dnsomatic.com`
-	ssh -L8888:127.0.0.1:8888 server -t 'ssh -L8888:127.0.0.1:8888 yhlinux'
+  export SSH_HOME=younghwan@`curl -s myip.dnsomatic.com`
+  ssh -L8888:127.0.0.1:8888 server -t 'ssh -L8888:127.0.0.1:8888 yhlinux'
 }
 
 # Remote Keylink on/off
 key(){
-	if [ "$1" == "on" ]; then
-		ssh linux -t "keylink on"
-	else
-		ssh linux -t "keylink off"
-	fi
+  if [ "$1" == "on" ]; then
+    ssh linux -t "keylink on"
+  else
+    ssh linux -t "keylink off"
+  fi
 }
 
 
@@ -88,8 +88,8 @@ alias cbhs="cat $HISTFILE | tail -n 1 | cb"
 
 # Show segment of file
 show(){
-    path="$1"
-    X=$2
-    Y=$3
-    tail -n +$X $path | head -n $((Y-X+1))
+  path="$1"
+  X=$2
+  Y=$3
+  tail -n +$X $path | head -n $((Y-X+1))
 }
