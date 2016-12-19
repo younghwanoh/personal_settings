@@ -4,19 +4,60 @@
 # 1: attach / new
 # 2: session number
 
+sessid=false
+while [ $# -gt 0 ]; do
+  case "$2" in
+    -h|--help)
+      echo "tmux-command [attach/new] [options]"
+      echo "options:"
+      echo "-h, --help        show this messages"
+      echo "-t, --titan       command to Titan Server or not"
+      echo "-s, --sess=NUM    session number for attach"
+      exit 0
+      ;;
+    --sess*)
+      export sessid=`echo $2 | sed -e 's/^[^=]*=//g'`; shift ;;
+    -s)
+      shift
+      if test $# -gt 0; then
+        export sessid=`echo $2 | sed -e 's/^[^=]*=//g'`
+      else
+        echo "No session id specified !"
+      fi
+      shift ;;
+    -t|--titan)
+      shift
+      if test $# -gt 0; then
+        titan=true
+      else
+        titan=false
+      fi
+      shift ;;
+    *) break ;;
+  esac
+done
+
 myip=`curl -s myip.dnsomatic.com`
 SSH_HOME=younghwan@$myip
 echo "Address of my computer: $SSH_HOME"
-if [ -z $2 ]; then
-	COM="tmux -CC $1"
+if $sessid; then
+  COM="tmux -CC $1 -t $2"
 else
-	COM="tmux -CC $1 -t $2"
+  COM="tmux -CC $1"
 fi
 
 if [[ $myip =~ ^147\.46\.[0-9]{1,3}\.[0-9]{1,3}$ ]]; then
-	echo "Local connection!"
-	ssh -t linux "$COM"
+  echo "Local connection!"
+  if $titan; then
+    ssh -t arc-titan "$COM"
+  else
+    ssh -t linux "$COM"
+  fi
 else
-	echo "External connection!"
-	ssh -t server "ssh -t yhlinux '$COM'"
+  echo "External connection!"
+  if $titan; then
+    ssh -t server "ssh -t arc-titan '$COM'"
+  else
+    ssh -t server "ssh -t yhlinux '$COM'"
+  fi
 fi
