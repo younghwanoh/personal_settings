@@ -29,6 +29,15 @@ show(){
   tail -n +$X $path | head -n $((Y-X+1))
 }
 
+# Run commands with redirecting stderr and stdout to files
+log(){
+  if [ -z $2 ]; then
+    $1 > >(tee stdout.log) 2> >(tee stderr.log >&2)
+  else
+    $1 > >(tee "$2"_out.log) 2> >(tee "$2"_err.log >&2)
+  fi
+}
+
 # FOR INSTALLED PACKAGES
 # ------------------------------------------------
 
