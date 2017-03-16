@@ -1,30 +1,30 @@
-set nocompatible              " be iMproved, required
-filetype off                  " required
-
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-
-" let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'Valloric/YouCompleteMe'
-
-" YCM:YouCompleteMe settings...
-let g:ycm_global_ycm_extra_conf = '~/workspace/caffe/.ycm_extra_conf.py'
-let g:ycm_confirm_extra_conf = 0
-
-" YCM:To avoid conflict snippets
-let g:ycm_key_list_select_completion = ['<C-j>', '<Down>']
-let g:ycm_key_list_previous_completion = ['<C-k>', '<Up>']
-let g:ycm_autoclose_preview_window_after_completion = 1
-
-" YCM:Setting for error/warning messages
-let g:ycm_show_diagnostics_ui = 0
-let g:ycm_warning_symbol = '@@'
-
-" All of your Plugins must be added before the following line
-call vundle#end()            " required
-filetype plugin indent on    " required
+" " set nocompatible              " be iMproved, required
+" filetype off                  " required
+"
+" " set the runtime path to include Vundle and initialize
+" set rtp+=~/.vim/bundle/Vundle.vim
+" call vundle#begin()
+"
+" " let Vundle manage Vundle, required
+" Plugin 'VundleVim/Vundle.vim'
+" Plugin 'Valloric/YouCompleteMe'
+"
+" " YCM:YouCompleteMe settings...
+" let g:ycm_global_ycm_extra_conf = '~/workspace/caffe/.ycm_extra_conf.py'
+" let g:ycm_confirm_extra_conf = 0
+"
+" " YCM:To avoid conflict snippets
+" let g:ycm_key_list_select_completion = ['<C-j>', '<Down>']
+" let g:ycm_key_list_previous_completion = ['<C-k>', '<Up>']
+" let g:ycm_autoclose_preview_window_after_completion = 1
+"
+" " YCM:Setting for error/warning messages
+" let g:ycm_show_diagnostics_ui = 0
+" let g:ycm_warning_symbol = '@@'
+"
+" " All of your Plugins must be added before the following line
+" call vundle#end()            " required
+" filetype plugin indent on    " required
 
 "=======================================================================================
 
@@ -59,6 +59,7 @@ augroup filetype
   au! BufNewFile,BufRead *.json.*              set filetype=javascript
   au! BufNewFile,BufRead *.cu                  set filetype=cuda.cpp
 augroup END
+call tcomment#DefineType('c', '// %s')
 call tcomment#DefineType('opencl', '// %s')
 call tcomment#DefineType('dat', '# %s')
 call tcomment#DefineType('prototxt', '# %s')
