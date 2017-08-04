@@ -47,7 +47,7 @@ augroup filetype
   au! BufRead,BufNewFile *.python*            set filetype=python
   au! BufRead,BufNewFile *.perl*              set filetype=perl
   au! BufRead,BufNewFile *.bin*               set filetype=bin
-  au! BufRead,BufNewFile *.s*                 set filetype=llvm
+  au! BufRead,BufNewFile *.s.*                 set filetype=llvm
   au! BufRead,BufNewFile *Makefile*           set filetype=make
   au! BufRead,BufNewFile *.{dat,csv,log}*     set filetype=dat
   au! BufRead,BufNewFile *.prototxt           set filetype=prototxt
