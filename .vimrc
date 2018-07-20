@@ -27,6 +27,7 @@
 " filetype plugin indent on    " required
 
 "=======================================================================================
+set viminfo='100,<1000,s1000
 
 " Default tab settings
 set tabstop=2
