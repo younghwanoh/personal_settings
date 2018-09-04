@@ -5,7 +5,7 @@
 # 2: session number
 
 sessid=false
-titan=false
+ext=false
 com=$1
 while [ $# -gt 0 ]; do
   case "$2" in
@@ -28,12 +28,15 @@ while [ $# -gt 0 ]; do
       fi
       shift
       break;;
-    -t|--titan)
+    -t|--target)
       shift
       if test $# -gt 0; then
-        titan=true
-      else
-        titan=false
+        ext=true
+        target=$2
+        if [[ -z "$2" ]]; then
+          echo "ERROR: Specify target connection!"
+          exit
+        fi
       fi
       shift ; break;;
     *) break ;;
@@ -50,17 +53,17 @@ else
   COM="tmux -CC $com"
 fi
 
-if [[ $myip =~ ^147\.46\.[0-9]{1,3}\.[0-9]{1,3}$ ]]; then
+if [[ $myip =~ ^147\.4[67]\.[0-9]{1,3}\.[0-9]{1,3}$ ]]; then
   echo "Local connection!"
-  if $titan; then
-    ssh -t arc-titan "$COM"
+  if $ext; then
+    ssh -t $target "$COM"
   else
     ssh -t linux "$COM"
   fi
 else
   echo "External connection!"
-  if $titan; then
-    ssh -t server "ssh -t arc-titan '$COM'"
+  if $ext; then
+    ssh -t linux "ssh -t $target '$COM'"
   else
     ssh -t server "ssh -t yhlinux '$COM'"
   fi
