@@ -43,7 +43,11 @@ alias vim='/usr/local/Cellar/vim/7.4.712/bin/vim'
 alias ctags='/usr/local/bin/ctags'
 
 # Initial assignment for SSH_HOME
-export SSH_HOME="void"
+export SSH_HOME=younghwan@`curl -s myip.dnsomatic.com`
+myip(){
+  ip=younghwan@`curl -s myip.dnsomatic.com`
+  cb $ip
+}
 
 # SSH-related command to linux server
 alias new="tmux-command new"
