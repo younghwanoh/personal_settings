@@ -1,0 +1,10 @@
+#!/usr/bin/python
+
+import os
+import sys
+
+try:
+    txt = sys.argv[1]
+    os.system("""curl -X POST -H 'Content-type: application/json' --data '{"text":"%s"}'  https://hooks.slack.com/services/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""" % txt)
+except:
+    print("Failed to send messages to nn1-student !")
