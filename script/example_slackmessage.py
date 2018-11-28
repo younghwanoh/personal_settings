@@ -30,8 +30,11 @@ with open("param.py", "r") as f:
         txt = sub("dynamic_selection_threshold", sth)
         # print(txt)
         # print("-----------------------------------------------")
+        # Get characterization string
         char = dyn_or_static(do_dyn_cand, do_dyn_sel)
         char = "light_weight"
+
+        # Configuration file
         with open("param.py", "wb") as fw:
             fw.write(txt)
 
@@ -39,8 +42,9 @@ with open("param.py", "r") as f:
           [char, str(cand_max), str(sel_size), do_dyn_cand, do_dyn_sel, "sample1500", "new"]
         ).lower())
 
+        # May requires customization casy by case
         command = "./start_squad.sh"
-
         os.system(" ".join([command, filename]))
 
-    os.system("slackmessage `cat {}`".format(filename))
+        # Send messages to slack
+        os.system("slackmessage `cat {}`".format(filename))
