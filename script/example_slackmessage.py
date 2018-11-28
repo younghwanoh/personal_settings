@@ -41,6 +41,6 @@ with open("param.py", "r") as f:
 
         command = "./start_squad.sh"
 
-        os.system(" ".join(command, filename))
+        os.system(" ".join([command, filename]))
 
     os.system("slackmessage `cat {}`".format(filename))
