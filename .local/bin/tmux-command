@@ -5,24 +5,30 @@
 # 2: session number
 
 sessid=false
+sessopt=
 ext=false
 com=$1
 while [ $# -gt 0 ]; do
   case "$2" in
     -h|--help)
-      echo "tmux-command [attach/new] [options]"
+      echo "tmux-command [attach/new/ls] [options]"
       echo "options:"
       echo "-h, --help        show this messages"
-      echo "-t, --titan       command to Titan Server or not"
+      echo "-t, --target      connection target (SSH alias)"
       echo "-s, --sess=NUM    session number for attach"
       exit 0
       ;;
     --sess*)
-      export sessid=`echo $2 | sed -e 's/^[^=]*=//g'`; shift ; shift ;;
+      sessid=`echo $2 | sed -e 's/^[^=]*=//g'`; shift ; shift ;;
     -s)
       shift
       if test $# -gt 0; then
-        export sessid=`echo $2 | sed -e 's/^[^=]*=//g'`
+        sessid=`echo $2 | sed -e 's/^[^=]*=//g'`
+        if [ $com == "new" ]; then
+          sessopt="-s"
+        else
+          sessopt="-t"
+        fi
       else
         echo "No session id specified !"
       fi
@@ -50,7 +56,7 @@ SSH_HOME=younghwan@$myip
 echo "Address of my computer: $SSH_HOME"
 if [ $sessid != false ]; then
   echo "Session ID: $sessid"
-  COM="tmux -CC $com -t $sessid"
+  COM="tmux -CC $com $sessopt $sessid"
 else
   if [ $com == "ls" ]; then
     COM="tmux ls"
