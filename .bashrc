@@ -4,6 +4,9 @@ export PATH=$PATH:~/.local/bin
 export PYTHONSTARTUP=~/.pythonrc
 export PYTHONPATH=$PYTHONPATH:~/workspace/ep-py:~/.local/mylib
 
+# To avoid matplotlib display errors on headless machine
+export QT_QPA_PLATFORM='offscreen'
+
 # Select SVN editor
 export SVN_EDITOR=vi
 
