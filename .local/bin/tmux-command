@@ -51,15 +51,17 @@ while [ $# -gt 0 ]; do
 done
 
 sshopt=-Y
-myip=`curl -s myip.dnsomatic.com`
-SSH_HOME=younghwan@$myip
-echo "Address of my computer: $SSH_HOME"
+myip=`curl -s ifconfig.me`
+echo $myip
+# echo "Address of my computer: $SSH_HOME"
 if [ $sessid != false ]; then
   echo "Session ID: $sessid"
   COM="tmux -CC $com $sessopt $sessid"
 else
   if [ $com == "ls" ]; then
     COM="tmux ls"
+  elif [ $com == "attach" ]; then
+    COM="tmux -CC attach -d"
   else
     COM="tmux -CC $com"
   fi
