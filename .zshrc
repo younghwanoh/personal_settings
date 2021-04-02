@@ -19,11 +19,35 @@ export CLICOLOR=1
 alias cbwd="pwd | cb"  
 
 # Initial assignment for SSH_HOME
-export SSH_HOME=younghwan@`ipconfig getifaddr en0`
 myip(){
-  ip=younghwan@`ipconfig getifaddr en0`
-  cb $ip
+  failed=false
+  target=('ifconfig.me' 'icanhazip.com' 'ipecho.net/plain' 'ifconfig.co' 'myip.dnsomatic.com')
+  for i in "${target[@]}"; do
+    export SSH_HOME=younghwan@`curl -s ${i}`
+    fail_check="html"
+    if test "${SSH_HOME#*$fail_check}" != "$SSH_HOME"; then
+      if [ -z "$1" ]; then
+        echo "Failed: ${SSH_HOME}, ${i}"
+        failed=true
+      fi
+    else
+      if [ -z "$1" ]; then
+        echo "Success: ${SSH_HOME}, ${i}"
+      fi
+      break
+    fi
+  done
+
+  if $failed; then
+    echo "------"
+    echo "All of IP identification targets are failed"
+  fi
+  
+  if [ -z "$1" ]; then
+      cb $SSH_HOME
+  fi
 }
+myip "initial"
 
 # Custom instructions
 alias lt='ls -alt'
@@ -42,8 +66,8 @@ alias tls="tmux-command ls"
 # Zsh-specific
 # Try "showkey -a" and press any key for keycodes
 bindkey  "^[[H"   beginning-of-line # home
-bindkey  "^[[F"   end-of-line
-bindkey  "^[[3~"  delete-char
+bindkey  "^[[F"   end-of-line # end
+bindkey  "^[[3~"  delete-char # delete
 
 # . ~/.local/anaconda2/etc/profile.d/conda.sh  # commented out by conda initialize
 # conda activate base  # commented out by conda initialize

@@ -64,6 +64,7 @@ call tcomment#DefineType('opencl', '// %s')
 call tcomment#DefineType('dat', '# %s')
 call tcomment#DefineType('prototxt', '# %s')
 call tcomment#DefineType('gp', '# %s')
+call tcomment#DefineType('zsh', '# %s')
 
 " file tpye plugins are enabled
 filetype plugin on
