@@ -36,9 +36,9 @@ set sw=2
 set expandtab
 
 " Show invisible marks
-" set lcs=tab:▸\ ,trail:·,eol:¬,nbsp:_
-" set lcs=tab:▸\ ,
-" set list
+set lcs=tab:▸\ ,trail:·,eol:¬,nbsp:_
+set lcs=tab:▸\ ,
+set list
 
 " Enable syntax highlighting ============================================================
 syntax on
@@ -58,6 +58,7 @@ augroup filetype
   au! BufRead,BufNewFile *.coffee*            set filetype=coffee
   au! BufNewFile,BufRead *.json*              set filetype=javascript
   au! BufNewFile,BufRead *.cu                 set filetype=cuda.cpp
+  au! BufNewFile,BufRead *.md                 set filetype=markdown
 augroup END
 call tcomment#DefineType('c', '// %s')
 call tcomment#DefineType('opencl', '// %s')
@@ -65,6 +66,7 @@ call tcomment#DefineType('dat', '# %s')
 call tcomment#DefineType('prototxt', '# %s')
 call tcomment#DefineType('gp', '# %s')
 call tcomment#DefineType('zsh', '# %s')
+call tcomment#DefineType('markdown', '<!-- %s -->')
 
 " file tpye plugins are enabled
 filetype plugin on
@@ -90,12 +92,12 @@ vmap r "_dP
 vmap "y "+y
 " vmap remote copy: vis plugin is needed to yank selected visual space.
 " Download the plugin @ http://vim.sourceforge.net/scripts/script.php?script_id=1195
-vmap <C-c> :B w !rcb<CR><CR>
-" if host != ''
-"   vmap <C-c> :B w !rcb<CR><CR>
-" else
-"   vmap <C-c> :B w !cb<CR><CR>
-" endif
+let host = system("echo -n $SSH_CLIENT")
+if host != ""
+  vmap <C-c> :B w !rcb<CR><CR>
+else
+  vmap <C-c> :B w !cb<CR><CR>
+endif
 " use 256 bit color
 let &t_Co=256
 " disable background color erase
@@ -138,7 +140,7 @@ function! XTermPasteBegin()
 endfunction
 
 " Highlight current line
-set cursorline
+" set cursorline
 " Highlight searches
 set hlsearch
 " Ignore case of searches
