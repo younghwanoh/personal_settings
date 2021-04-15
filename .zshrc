@@ -22,6 +22,7 @@ alias cbwd="pwd | cb"
 myip(){
   failed=false
   target=('ifconfig.me' 'icanhazip.com' 'ipecho.net/plain' 'ifconfig.co' 'myip.dnsomatic.com')
+
   for i in "${target[@]}"; do
     export SSH_HOME=younghwan@`curl -s ${i}`
     fail_check="html"
