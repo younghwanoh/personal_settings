@@ -147,7 +147,7 @@ elif [ "$(uname -s)" == "Linux" ] && [ "$1" == "init" ]; then
   # SSH home variable settings
   sudo echo "SendEnv SSH_HOME" >> ~/.ssh/config
   if [ -f /etc/ssh/sshd_config ]; then
-    sudo echo "AcceptEnv SSH_HOME" >> /etc/ssh/sshd_config
+    echo "AcceptEnv SSH_HOME" | sudo tee -a /etc/ssh/sshd_config
     sudo service ssh restart
   else
     color "%s variable cannot be set, install openssh-server.\n" "SSH_HOME" "b"
