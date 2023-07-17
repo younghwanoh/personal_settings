@@ -27,6 +27,9 @@
 " filetype plugin indent on    " required
 
 "=======================================================================================
+scriptencoding utf-8
+set encoding=utf-8
+
 set viminfo='100,<1000,s1000
 
 " Default tab settings
