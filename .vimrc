@@ -48,7 +48,7 @@ augroup filetype
   au! BufRead,BufNewFile *.python*            set filetype=python
   au! BufRead,BufNewFile *.perl*              set filetype=perl
   au! BufRead,BufNewFile *.bin*               set filetype=bin
-  au! BufRead,BufNewFile *.{s,ll}.*           set filetype=llvm
+  au! BufRead,BufNewFile *.s.*                set filetype=llvm
   au! BufRead,BufNewFile *Makefile*           set filetype=make
   au! BufRead,BufNewFile *.{dat,csv,log}*     set filetype=dat
   au! BufRead,BufNewFile *.prototxt           set filetype=prototxt
@@ -59,10 +59,11 @@ augroup filetype
   au! BufNewFile,BufRead *.json*              set filetype=javascript
   au! BufNewFile,BufRead *.cu                 set filetype=cuda.cpp
   au! BufNewFile,BufRead *.md                 set filetype=markdown
-  au! BufNewFile,BufRead *.td                 set filetype=tablegen
-  au! BufNewFile,BufRead *.rst                set filetype=rest
   au! BufNewFile,BufRead *.mlir               set filetype=mlir
-
+  au! BufRead,BufNewFile *.ll                 set filetype=llvm
+  au! BufRead,BufNewFile *.td                 set filetype=tablegen
+  au! BufRead,BufNewFile *.rst                set filetype=rest
+  au! BufRead,BufNewFile Dockerfile.*         set filetype=dockerfile
 augroup END
 call tcomment#DefineType('c', '// %s')
 call tcomment#DefineType('opencl', '// %s')
